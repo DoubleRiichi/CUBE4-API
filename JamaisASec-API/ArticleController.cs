@@ -25,13 +25,13 @@ namespace JamaisASec_API
         [HttpGet]
         public ActionResult GetAll()
         {
-            var options = new JsonSerializerOptions { WriteIndented = true };
+
             var data = _context.Articles;
 
-            string dataJson = JsonSerializer.Serialize(data.ToList(),options);
+           
             
 
-            return Ok(dataJson);
+            return Ok(data);
         }
 
         public IActionResult Create([FromBody] Articles entity)
