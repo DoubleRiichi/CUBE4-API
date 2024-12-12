@@ -1,6 +1,6 @@
 
 
-using JamaisASec_API;
+using JamaisASec;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;

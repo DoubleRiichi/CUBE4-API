@@ -1,11 +1,10 @@
-namespace JamaisASec.DB;
-
-public record Client {
+namespace JamaisASec.Models;
+public class Clients {
     public int ID { get; set; }
     public string Nom { get; set; }
     public string Adresse { get; set; }
     public string Mail { get; set; }
-    public string Telephone { get; set; }
+    public string Téléphone { get; set; }
     
 }
 
