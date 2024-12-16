@@ -14,7 +14,10 @@ builder.Services.AddDbContext<JamaisASecDbContext>(options =>
     new MySqlServerVersion(new Version(8, 0, 21))));
 
 // ajout des controlleurs
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.WriteIndented = true; // Active l'indentation
+});
 
 
 //Permet la génération automatique de documentation des routes

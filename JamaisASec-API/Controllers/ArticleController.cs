@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using JamaisASec;
 using JamaisASec.Models;
+using System.Text.Json;
 
 
 namespace JamaisASec.Controllers
@@ -14,6 +15,7 @@ namespace JamaisASec.Controllers
     {
         private readonly JamaisASecDbContext _context;
 
+
         public ArticlesController(JamaisASecDbContext context)
 
         {
@@ -25,7 +27,11 @@ namespace JamaisASec.Controllers
         public ActionResult GetAll()
         {
 
-            var data = _context.Articles.ToList();
+            var data = _context.Articles;
+
+           
+            
+
             return Ok(data);
         }
 
