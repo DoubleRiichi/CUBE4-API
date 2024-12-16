@@ -2,7 +2,7 @@ namespace JamaisASec.Models;
 
 public class Commandes {
     public int ID { get; set; }
-    public string Référence { get; set; }
+    public string Reference { get; set; }
     public DateOnly Date { get; set; }
     public string Status  { get; set; }
    
