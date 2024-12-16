@@ -1,4 +1,4 @@
-namespace JamaisASec.DB;
+namespace JamaisASec.Models;
 
 public record ArticleCommandes {
     public int ID { get; set; }

@@ -30,12 +30,12 @@ SET time_zone = "+00:00";
 CREATE TABLE `articles` (
   `id` int(10) UNSIGNED NOT NULL,
   `nom` varchar(200) NOT NULL,
-  `quantité` int(10) UNSIGNED NOT NULL,
+  `quantite` int(10) UNSIGNED NOT NULL,
   `image` varchar(400) DEFAULT NULL,
   `prix_unitaire` int(10) UNSIGNED NOT NULL,
   `colisage` int(10) UNSIGNED NOT NULL,
-  `quantité_min` int(10) UNSIGNED NOT NULL,
-  `année` int(10) UNSIGNED NOT NULL,
+  `quantite_min` int(10) UNSIGNED NOT NULL,
+  `annee` int(10) UNSIGNED NOT NULL,
   `description` text DEFAULT NULL,
   `familles_id` int(10) UNSIGNED DEFAULT NULL,
   `maisons_id` int(10) UNSIGNED DEFAULT NULL
@@ -45,7 +45,7 @@ CREATE TABLE `articles` (
 -- Dumping data for table `articles`
 --
 
-INSERT INTO `articles` (`id`, `nom`, `quantité`, `image`, `prix_unitaire`, `colisage`, `quantité_min`, `année`, `description`, `familles_id`, `maisons_id`) VALUES
+INSERT INTO `articles` (`id`, `nom`, `quantite`, `image`, `prix_unitaire`, `colisage`, `quantite_min`, `annee`, `description`, `familles_id`, `maisons_id`) VALUES
 (1, 'Chateau Margaux 2015', 120, 'margaux_2015.jpg', 1200, 6, 1, 2015, 'Vin rouge elegant aux aromes de fruits rouges et notes boisees.', 1, 1),
 (2, 'Romanee-Conti 2018', 50, 'romanee_conti_2018.jpg', 20000, 1, 1, 2018, 'Un vin mythique, riche et complexe.', 1, 2),
 (3, 'Maison Mumm Cordon Rouge', 200, 'mumm_cordon_rouge.jpg', 35, 12, 6, 2023, 'Champagne brut aux notes de pomme et de brioche.', 4, 3),
@@ -100,14 +100,14 @@ CREATE TABLE `clients` (
   `nom` varchar(200) NOT NULL,
   `adresse` varchar(400) DEFAULT NULL,
   `mail` varchar(320) DEFAULT NULL,
-  `téléphone` varchar(12) DEFAULT NULL
+  `telephone` varchar(12) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `clients`
 --
 
-INSERT INTO `clients` (`id`, `nom`, `adresse`, `mail`, `téléphone`) VALUES
+INSERT INTO `clients` (`id`, `nom`, `adresse`, `mail`, `telephone`) VALUES
 (1, 'Caviste Parisien', '15 rue de la Vigne, Paris', 'caviste.paris@gmail.com', '0142234455'),
 (2, 'Restaurant etoile', '12 avenue des Grands Crus, Lyon', 'etoile.lyon@gmail.com', '0478223344'),
 (3, 'Collectionneur Prive', '8 rue des Vins Rares, Bordeaux', 'prive.bordeaux@gmail.com', '0556778899'),
@@ -127,7 +127,7 @@ INSERT INTO `clients` (`id`, `nom`, `adresse`, `mail`, `téléphone`) VALUES
 
 CREATE TABLE `commandes` (
   `id` int(10) UNSIGNED NOT NULL,
-  `référence` varchar(16) NOT NULL,
+  `reference` varchar(16) NOT NULL,
   `date` datetime NOT NULL,
   `status` varchar(30) DEFAULT NULL,
   `clients_id` int(10) UNSIGNED DEFAULT NULL,
@@ -138,7 +138,7 @@ CREATE TABLE `commandes` (
 -- Dumping data for table `commandes`
 --
 
-INSERT INTO `commandes` (`id`, `référence`, `date`, `status`, `clients_id`, `fournisseurs_id`) VALUES
+INSERT INTO `commandes` (`id`, `reference`, `date`, `status`, `clients_id`, `fournisseurs_id`) VALUES
 (1, 'CMD001', '2024-11-01 10:00:00', 'En attente', 1, 1),
 (2, 'CMD002', '2024-11-02 12:00:00', 'Confirmee', 2, 2),
 (3, 'CMD003', '2024-11-03 14:00:00', 'Livree', 3, 3),
@@ -188,7 +188,7 @@ CREATE TABLE `fournisseurs` (
   `nom` varchar(200) NOT NULL,
   `adresse` varchar(400) DEFAULT NULL,
   `mail` varchar(320) DEFAULT NULL,
-  `téléphone` varchar(12) DEFAULT NULL,
+  `telephone` varchar(12) DEFAULT NULL,
   `SIRET` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -196,7 +196,7 @@ CREATE TABLE `fournisseurs` (
 -- Dumping data for table `fournisseurs`
 --
 
-INSERT INTO `fournisseurs` (`id`, `nom`, `adresse`, `mail`, `téléphone`, `SIRET`) VALUES
+INSERT INTO `fournisseurs` (`id`, `nom`, `adresse`, `mail`, `telephone`, `SIRET`) VALUES
 (1, 'Maison Bordeaux Sud', '34 rue des Graves, Bordeaux', 'contact@bordeauxsud.fr', '0556341122', '11223344556677'),
 (2, 'Maison de Champagne', '8 avenue des Champagnes, Reims', 'contact@champagne.fr', '0326347788', '22334455667788'),
 (3, 'Vignobles de Provence', '12 route des Roses, Aix-en-Provence', 'contact@vignoblesprovence.fr', '0490112233', '33445566778899'),

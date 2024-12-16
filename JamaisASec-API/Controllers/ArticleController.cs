@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using JamaisASec;
+using JamaisASec.Models;
 using System.Text.Json;
 
 
 
-namespace JamaisASec_API
+namespace JamaisASec.Controllers
 
 
 
