@@ -1,16 +1,14 @@
-namespace JamaisASec.DB;
+namespace JamaisASec.Models;
 
-public record Commande {
+public class Commandes {
     public int ID { get; set; }
     public string Reference { get; set; }
     public DateOnly Date { get; set; }
     public string Status  { get; set; }
    
-    public int ArticleCommandeID { get; set; }
-
     // ? signifie peut-être null
-    public int? ClientID { get; set; }
-    public int? FournisseurID { get; set; }
+    public int? Clients_ID { get; set; }
+    public int? Fournisseurs_ID { get; set; }
 
 }
 
