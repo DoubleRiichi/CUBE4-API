@@ -1,4 +1,0 @@
-namespace JamaisASec.DB;
-
-
-
