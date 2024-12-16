@@ -1,4 +1,4 @@
-namespace JamaisASec.DB;
+namespace JamaisASec.Models;
 
 public class Articles
 {
