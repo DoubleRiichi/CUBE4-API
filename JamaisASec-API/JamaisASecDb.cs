@@ -13,7 +13,10 @@ public class JamaisASecDbContext : DbContext
 
     public DbSet<Articles> Commandes { get; set; }
     public DbSet<Articles> Familles { get; set; }
-    public DbSet<Articles> Fournisseurs { get; set; }
-    public DbSet<Articles> Maisons { get; set; }
+    //public DbSet<Articles> Fournisseurs { get; set; }
+    public DbSet<Fournisseurs> Fournisseurs { get; set; }
+    //public DbSet<Articles> Maisons { get; set; }
+
+    public DbSet<Maisons> Maisons { get; set; }
 }
 
