@@ -14,6 +14,7 @@ public class JamaisASecDbContext : DbContext
     public DbSet<Commandes> Commandes { get; set; }
     public DbSet<Familles> Familles { get; set; }
     public DbSet<Fournisseurs> Fournisseurs { get; set; }
+
     public DbSet<Maisons> Maisons { get; set; }
 }
 
