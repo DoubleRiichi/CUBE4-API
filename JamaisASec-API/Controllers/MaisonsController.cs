@@ -12,12 +12,12 @@ namespace JamaisASec.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ArticlesController : ControllerBase
+    public class MaisonsController : ControllerBase
     {
         private readonly JamaisASecDbContext _context;
 
 
-        public ArticlesController(JamaisASecDbContext context)
+        public MaisonsController(JamaisASecDbContext context)
 
         {
             _context = context;
@@ -28,7 +28,7 @@ namespace JamaisASec.Controllers
         public ActionResult GetAll()
         {
 
-            var data = _context.Articles;
+            var data = _context.Maisons;
 
            
             
@@ -36,11 +36,11 @@ namespace JamaisASec.Controllers
             return Ok(data);
         }
 
-        public IActionResult Create([FromBody] Articles article)
+        public IActionResult Create([FromBody] Maisons maison)
         {
-            _context.Articles.Add(article);
+            _context.Maisons.Add(maison);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(GetAll), new { id = article.ID }, article);
+            return CreatedAtAction(nameof(GetAll), new { id = maison.ID }, maison);
         }
 
     }
