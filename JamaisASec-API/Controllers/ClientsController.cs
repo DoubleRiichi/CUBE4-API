@@ -36,6 +36,7 @@ namespace JamaisASec.Controllers
             return Ok(data);
         }
 
+        [HttpPost]
         public IActionResult Create([FromBody] Clients client)
         {
             _context.Clients.Add(client);

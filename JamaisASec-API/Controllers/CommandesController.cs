@@ -36,6 +36,7 @@ namespace JamaisASec.Controllers
             return Ok(data);
         }
 
+        [HttpPost]
         public IActionResult Create([FromBody] Commandes commande)
         {
             _context.Commandes.Add(commande);

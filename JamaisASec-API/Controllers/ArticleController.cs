@@ -35,7 +35,7 @@ namespace JamaisASec.Controllers
 
             return Ok(data);
         }
-
+        [HttpPost]
         public IActionResult Create([FromBody] Articles article)
         {
             _context.Articles.Add(article);

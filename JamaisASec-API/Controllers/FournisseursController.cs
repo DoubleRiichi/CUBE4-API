@@ -36,6 +36,7 @@ namespace JamaisASec.Controllers
             return Ok(data);
         }
 
+        [HttpPost]
         public IActionResult Create([FromBody] Fournisseurs fournisseur)
         {
             _context.Fournisseurs.Add(fournisseur);
