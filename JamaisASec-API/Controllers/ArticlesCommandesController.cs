@@ -11,7 +11,6 @@ namespace JamaisASec.Controllers
 
 {
     [ApiController]
-    [Route("api/[controller]")]
     public class ArticlesCommandesController : ControllerBase
     {
         private readonly JamaisASecDbContext _context;
@@ -25,6 +24,7 @@ namespace JamaisASec.Controllers
 
         }
         [HttpGet]
+        [Route("[controller]/get/all")]
         public ActionResult GetAll()
         {
 

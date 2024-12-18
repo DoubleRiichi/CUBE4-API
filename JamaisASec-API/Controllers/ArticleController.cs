@@ -5,13 +5,12 @@ using System.Text.Json;
 
 
 
-namespace JamaisASec.Controllers
+    namespace JamaisASec.Controllers
 
 
 
 {
     [ApiController]
-    [Route("api/[controller]")]
     public class ArticlesController : ControllerBase
     {
         private readonly JamaisASecDbContext _context;
@@ -25,6 +24,7 @@ namespace JamaisASec.Controllers
 
         }
         [HttpGet]
+        [Route("[controller]/get/all")]
         public ActionResult GetAll()
         {
 
@@ -36,6 +36,7 @@ namespace JamaisASec.Controllers
             return Ok(data);
         }
         [HttpPost]
+        [Route("[controller]/create")]
         public IActionResult Create([FromBody] Articles article)
         {
             _context.Articles.Add(article);
