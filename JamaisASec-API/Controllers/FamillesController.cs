@@ -11,7 +11,6 @@ namespace JamaisASec.Controllers
 
 {
     [ApiController]
-    [Route("api/[controller]")]
     public class FamillesController : ControllerBase
     {
         private readonly JamaisASecDbContext _context;
@@ -25,6 +24,7 @@ namespace JamaisASec.Controllers
 
         }
         [HttpGet]
+        [Route("[controller]/get/all")]
         public ActionResult GetAll()
         {
 
@@ -37,6 +37,7 @@ namespace JamaisASec.Controllers
         }
 
         [HttpPost]
+        [Route("[controller]/create")]
         public IActionResult Create([FromBody] Familles famille)
         {
             _context.Familles.Add(famille);
