@@ -6,7 +6,7 @@ using System.Linq;
 namespace JamaisASec.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("/[controller]")]
     public class MaisonsController : ControllerBase
     {
         private readonly JamaisASecDbContext _context;
