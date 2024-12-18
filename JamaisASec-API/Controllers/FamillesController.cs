@@ -36,6 +36,7 @@ namespace JamaisASec.Controllers
             return Ok(data);
         }
 
+        [HttpPost]
         public IActionResult Create([FromBody] Familles famille)
         {
             _context.Familles.Add(famille);
