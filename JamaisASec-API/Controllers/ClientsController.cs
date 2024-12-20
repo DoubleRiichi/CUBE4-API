@@ -20,7 +20,12 @@ namespace JamaisASec.Controllers
         public ActionResult GetAll()
         {
             var data = _context.Clients.ToList();
-            return Ok(data);
+
+            if(data.Any()) {
+                return Ok(data);
+            }
+
+            return NotFound();
         }
 
         [HttpGet]
@@ -28,10 +33,12 @@ namespace JamaisASec.Controllers
         public ActionResult GetById(int id)
         {
             var client = _context.Clients.Find(id);
+
             if (client == null)
             {
                 return NotFound();
             }
+
             return Ok(client);
         }
 

@@ -21,7 +21,12 @@ namespace JamaisASec.Controllers
         public ActionResult GetAll()
         {
             var data = _context.Maisons.ToList();
-            return Ok(data);
+
+            if(data.Any()) { 
+                return Ok(data);
+            }
+
+            return NotFound();
         }
 
         [HttpGet]

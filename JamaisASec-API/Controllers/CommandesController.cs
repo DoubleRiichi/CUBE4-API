@@ -14,25 +14,51 @@ namespace JamaisASec.Controllers
         {
             _context = context;
         }
-
-        [HttpGet]
+  [HttpGet]
         [Route("get/all")]
         public ActionResult GetAll()
         {
-            var data = _context.Commandes.ToList();
-            return Ok(data);
+
+            var data = from commande in _context.Commandes
+                       join client in _context.Clients
+                            on commande.Clients_ID equals client.ID into ClientGroup
+                       from client in ClientGroup.DefaultIfEmpty()
+                       join fournisseur  in _context.Fournisseurs
+                       on commande.Fournisseurs_ID equals fournisseur.ID into fournisseurGroup
+                       from fournisseur in fournisseurGroup.DefaultIfEmpty()
+                       select new { commande, client, fournisseur };
+
+
+           if(data.Any()) {
+                return Ok(data);
+            }
+
+
+            return NotFound();
         }
 
         [HttpGet]
         [Route("get/{id}")]
         public ActionResult GetById(int id)
         {
-            var commande = _context.Commandes.Find(id);
-            if (commande == null)
+            var data = from commande in _context.Commandes
+                       where commande.ID == id
+                       join client in _context.Clients
+                            on commande.Clients_ID equals client.ID into ClientGroup
+                       from client in ClientGroup.DefaultIfEmpty()
+                       join fournisseur in _context.Fournisseurs
+                       on commande.Fournisseurs_ID equals fournisseur.ID into fournisseurGroup
+                       from fournisseur in fournisseurGroup.DefaultIfEmpty()
+                       select new { commande, client, fournisseur };
+
+
+            if (data.Any())
             {
-                return NotFound();
+                return Ok(data);
             }
-            return Ok(commande);
+
+
+            return NotFound();
         }
 
         [HttpPost]

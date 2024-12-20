@@ -21,7 +21,11 @@ namespace JamaisASec.Controllers
         public ActionResult GetAll()
         {
             var data = _context.Fournisseurs.ToList();
-            return Ok(data);
+            if(data.Any()) { 
+                return Ok(data);
+            }
+
+            return NotFound();
         }
 
         [HttpGet]
@@ -33,6 +37,7 @@ namespace JamaisASec.Controllers
             {
                 return NotFound();
             }
+
             return Ok(fournisseur);
         }
 
