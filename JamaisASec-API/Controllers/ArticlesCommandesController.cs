@@ -36,7 +36,11 @@ namespace JamaisASec.Controllers
                        join commande in _context.Commandes
                        on articlecommande.Commandes_ID equals commande.ID into commandeGroup
                        from commande in commandeGroup.DefaultIfEmpty()
-                       select new { articlecommande, article, commande};
+                       select new 
+                       {    articlecommande.ID, 
+                            article, 
+                            commande
+                       };
 
 
 
@@ -61,7 +65,12 @@ namespace JamaisASec.Controllers
                        join commande in _context.Commandes
                        on articlecommande.Commandes_ID equals commande.ID into commandeGroup
                        from commande in commandeGroup.DefaultIfEmpty()
-                       select new { articlecommande, article, commande };
+                       select new
+                       {
+                           articlecommande.ID,
+                           article,
+                           commande
+                       };
 
 
 

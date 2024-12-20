@@ -26,10 +26,18 @@ namespace JamaisASec.Controllers
                        join fournisseur  in _context.Fournisseurs
                        on commande.Fournisseurs_ID equals fournisseur.ID into fournisseurGroup
                        from fournisseur in fournisseurGroup.DefaultIfEmpty()
-                       select new { commande, client, fournisseur };
+                       select new
+                       {
+                           commande.ID,
+                           commande.Reference,
+                           commande.Date,
+                           commande.Status,
+                           client,
+                           fournisseur
+                       };
 
 
-           if(data.Any()) {
+            if (data.Any()) {
                 return Ok(data);
             }
 
@@ -49,7 +57,15 @@ namespace JamaisASec.Controllers
                        join fournisseur in _context.Fournisseurs
                        on commande.Fournisseurs_ID equals fournisseur.ID into fournisseurGroup
                        from fournisseur in fournisseurGroup.DefaultIfEmpty()
-                       select new { commande, client, fournisseur };
+                       select new 
+                       { 
+                           commande.ID,
+                           commande.Reference,
+                           commande.Date,
+                           commande.Status,
+                           client, 
+                           fournisseur 
+                       };
 
 
             if (data.Any())

@@ -36,10 +36,22 @@ using System.Text.Json;
                        join maison  in _context.Maisons
                        on article.Maisons_ID equals maison.ID into maisonGroup
                        from maison in maisonGroup.DefaultIfEmpty()
-                       select new { article, famille, maison };
+                       select new
+                       {
+                           article.ID,
+                           article.Nom,
+                           article.Description,
+                           article.Quantite,
+                           article.Quantite_Min,
+                           article.Colisage,
+                           article.Prix_unitaire,
+                           article.Annee,
+                           article.Image,
+                           famille,
+                           maison
+                       };
 
-
-           if(data.Any()) {
+            if (data.Any()) {
                 return Ok(data);
             }
 
@@ -61,8 +73,20 @@ using System.Text.Json;
                        join maison in _context.Maisons
                        on article.Maisons_ID equals maison.ID into maisonGroup
                        from maison in maisonGroup.DefaultIfEmpty()
-                       select new { article, famille, maison };
-
+                       select new
+                       {
+                           article.ID,
+                           article.Nom,
+                           article.Description,
+                           article.Quantite,
+                           article.Quantite_Min,
+                           article.Colisage,
+                           article.Prix_unitaire,
+                           article.Annee,
+                           article.Image,
+                           famille,
+                           maison
+                       };
 
 
             if (data.Any())
