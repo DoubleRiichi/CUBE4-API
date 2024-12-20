@@ -29,12 +29,22 @@ using System.Text.Json;
         public ActionResult GetAll()
         {
 
-            var data = _context.Articles;
+            var data = from article in _context.Articles
+                       join famille in _context.Familles
+                            on article.Familles_ID equals famille.ID into familleGroup
+                       from famille in familleGroup.DefaultIfEmpty()
+                       join maison  in _context.Maisons
+                       on article.Maisons_ID equals maison.ID into maisonGroup
+                       from maison in maisonGroup.DefaultIfEmpty()
+                       select new { article, famille, maison };
 
-           
-            
 
-            return Ok(data);
+           if(data.Any()) {
+                return Ok(data);
+            }
+
+
+            return NotFound();
         }
 
         [HttpGet]
@@ -42,9 +52,20 @@ using System.Text.Json;
         public ActionResult GetById(int id)
         {
 
-            var data = _context.Articles.Find(id);
 
-            if(data != null)
+            var data = from article in _context.Articles
+                       where article.ID == id
+                       join famille in _context.Familles
+                            on article.Familles_ID equals famille.ID into familleGroup
+                       from famille in familleGroup.DefaultIfEmpty()
+                       join maison in _context.Maisons
+                       on article.Maisons_ID equals maison.ID into maisonGroup
+                       from maison in maisonGroup.DefaultIfEmpty()
+                       select new { article, famille, maison };
+
+
+
+            if (data.Any())
             {
                 return Ok(data);
             }
@@ -115,4 +136,5 @@ using System.Text.Json;
         }
 
     }
+
 }
