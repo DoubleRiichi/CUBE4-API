@@ -20,7 +20,13 @@ namespace JamaisASec.Controllers
         public ActionResult GetAll()
         {
             var data = _context.Familles.ToList();
-            return Ok(data);
+
+            if (data.Any()) {
+                return Ok(data);
+
+            }
+
+            return NotFound();
         }
 
         [HttpGet]

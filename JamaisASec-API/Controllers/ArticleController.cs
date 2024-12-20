@@ -120,7 +120,7 @@ using System.Text.Json;
 
 
         [HttpDelete]
-        [Route("delete/{id}")]
+        [Route("[controller]/delete/{id}")]
         public IActionResult Delete(int id)
         {
             var article = _context.Articles.Find(id);
