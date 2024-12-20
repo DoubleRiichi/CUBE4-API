@@ -50,9 +50,18 @@ namespace JamaisASec.Controllers
                 return BadRequest("Maison data is null.");
             }
 
-            _context.Maisons.Add(maison);
-            _context.SaveChanges();
-            return CreatedAtAction(nameof(GetById), new { id = maison.ID }, maison);
+            try
+            {
+                _context.Maisons.Add(maison);
+                _context.SaveChanges();
+                return CreatedAtAction(nameof(GetById), new { id = maison.ID }, maison);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500); // 500 = internal server error 
+            }
+
+
         }
 
         [HttpPut]
@@ -71,11 +80,18 @@ namespace JamaisASec.Controllers
             }
 
             existingMaison.Nom = maison.Nom;
-        
 
-            _context.Maisons.Update(existingMaison);
-            _context.SaveChanges();
-            return NoContent();
+            try
+            {
+                _context.Maisons.Update(existingMaison);
+                _context.SaveChanges();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500); // 500 = internal server error 
+            }
+
         }
 
         [HttpDelete]
@@ -88,9 +104,17 @@ namespace JamaisASec.Controllers
                 return NotFound();
             }
 
-            _context.Maisons.Remove(maison);
-            _context.SaveChanges();
-            return NoContent();
+            try
+            {
+                _context.Maisons.Remove(maison);
+                _context.SaveChanges();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500); // 500 = internal server error 
+            }
+
         }
     }
 }

@@ -101,11 +101,16 @@ using System.Text.Json;
             existingArticle.Familles_ID = article.Familles_ID;
             existingArticle.Maisons_ID = article.Maisons_ID;
 
+            try {
 
+                _context.Articles.Update(existingArticle);
+                _context.SaveChanges();
+                return Ok();
+            }
+            catch (Exception ex) {
+                return StatusCode(500); // 500 = internal server error 
+            }
 
-            _context.Articles.Update(existingArticle);
-            _context.SaveChanges();
-            return NoContent();
         }
 
 
@@ -113,9 +118,15 @@ using System.Text.Json;
         [Route("[controller]/create")]
         public IActionResult Create([FromBody] Articles article)
         {
-            _context.Articles.Add(article);
-            _context.SaveChanges();
-            return CreatedAtAction(nameof(GetAll), new { id = article.ID }, article);
+            try {
+                _context.Articles.Add(article);
+                _context.SaveChanges();
+                return CreatedAtAction(nameof(GetAll), new { id = article.ID }, article);
+            }
+            catch (Exception ex) {
+                return StatusCode(500); // 500 = internal server error 
+            }
+
         }
 
 
@@ -129,10 +140,17 @@ using System.Text.Json;
                 return NotFound();
             }
 
-            _context.Articles.Remove(article);
-            _context.SaveChanges();
 
-            return NoContent();
+            try {
+                _context.Articles.Remove(article);
+                _context.SaveChanges();
+
+                return Ok();
+            }
+            catch (Exception ex) {
+                return StatusCode(500); // 500 = internal server error 
+            }
+ 
         }
 
     }

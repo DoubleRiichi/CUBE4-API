@@ -50,9 +50,16 @@ namespace JamaisASec.Controllers
                 return BadRequest("Famille data is null.");
             }
 
-            _context.Familles.Add(famille);
-            _context.SaveChanges();
-            return CreatedAtAction(nameof(GetById), new { id = famille.ID }, famille);
+            try
+            {
+                _context.Familles.Add(famille);
+                _context.SaveChanges();
+                return CreatedAtAction(nameof(GetById), new { id = famille.ID }, famille);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500); // 500 = internal server error 
+            }
         }
 
         [HttpPut]
@@ -72,9 +79,17 @@ namespace JamaisASec.Controllers
 
             existingFamille.Nom = famille.Nom;
 
-            _context.Familles.Update(existingFamille);
-            _context.SaveChanges();
-            return NoContent();
+            try
+            {
+                _context.Familles.Update(existingFamille);
+                _context.SaveChanges();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500); // 500 = internal server error 
+            }
+
         }
 
         [HttpDelete]
@@ -87,9 +102,17 @@ namespace JamaisASec.Controllers
                 return NotFound();
             }
 
-            _context.Familles.Remove(famille);
-            _context.SaveChanges();
-            return NoContent();
+            try
+            {
+                _context.Familles.Remove(famille);
+                _context.SaveChanges();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500); // 500 = internal server error 
+            }
+
         }
     }
 }

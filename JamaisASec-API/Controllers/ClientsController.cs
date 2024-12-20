@@ -51,9 +51,17 @@ namespace JamaisASec.Controllers
                 return BadRequest("Client data is null.");
             }
 
-            _context.Clients.Add(client);
-            _context.SaveChanges();
-            return CreatedAtAction(nameof(GetById), new { id = client.ID }, client);
+            try
+            {
+                _context.Clients.Add(client);
+                _context.SaveChanges();
+                return CreatedAtAction(nameof(GetById), new { id = client.ID }, client);
+            } catch (Exception ex)
+            {
+
+                return StatusCode(500);
+            }
+
         }
 
         [HttpPut]
@@ -76,9 +84,14 @@ namespace JamaisASec.Controllers
             existingClient.Mail = client.Mail;
             existingClient.Telephone = client.Telephone;
 
-            _context.Clients.Update(existingClient);
-            _context.SaveChanges();
-            return NoContent();
+            try {
+                _context.Clients.Update(existingClient);
+                _context.SaveChanges();
+                return Ok();
+            } catch (Exception ex) {
+                return StatusCode(500); // 500 = internal server error 
+            }
+
         }
 
         [HttpDelete]
@@ -91,9 +104,17 @@ namespace JamaisASec.Controllers
                 return NotFound();
             }
 
-            _context.Clients.Remove(client);
-            _context.SaveChanges();
-            return NoContent();
+            try
+            {
+               _context.Clients.Remove(client);
+               _context.SaveChanges();
+               return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500); // 500 = internal server error 
+            }
+ 
         }
     }
 }

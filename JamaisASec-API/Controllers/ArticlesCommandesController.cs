@@ -78,9 +78,18 @@ namespace JamaisASec.Controllers
         [Route("[controller]/create")]
         public IActionResult Create([FromBody] ArticlesCommandes articlecommande)
         {
-            _context.ArticlesCommandes.Add(articlecommande);
-            _context.SaveChanges();
-            return CreatedAtAction(nameof(GetAll), new { id = articlecommande.ID }, articlecommande);
+            try
+            {
+                _context.ArticlesCommandes.Add(articlecommande);
+                _context.SaveChanges();
+                return CreatedAtAction(nameof(GetAll), new { id = articlecommande.ID }, articlecommande);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500); // 500 = internal server error 
+            }
+
+
         }
 
 
@@ -89,15 +98,21 @@ namespace JamaisASec.Controllers
         public IActionResult Delete(int id)
         {
             var articlecommande = _context.ArticlesCommandes.Find(id);
-            if (articlecommande == null)
-            {
+            if (articlecommande == null) {
                 return NotFound();
             }
 
-            _context.ArticlesCommandes.Remove(articlecommande);
-            _context.SaveChanges();
+            try {
+                _context.ArticlesCommandes.Remove(articlecommande);
+                _context.SaveChanges();
 
-            return NoContent();
+                return Ok();
+            }
+            catch (Exception ex) {
+                return StatusCode(500); // 500 = internal server error 
+            }
+
+
         }
 
 
