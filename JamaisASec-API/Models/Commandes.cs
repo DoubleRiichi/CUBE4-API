@@ -8,6 +8,7 @@ public class Commandes {
    
     // ? signifie peut-être null
     public int? Clients_ID { get; set; }
+    public int? Fournisseurs_id { get; set; }
 
 }
 
