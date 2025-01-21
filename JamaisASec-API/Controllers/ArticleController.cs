@@ -33,9 +33,12 @@ using System.Text.Json;
                        join famille in _context.Familles
                             on article.Familles_ID equals famille.ID into familleGroup
                        from famille in familleGroup.DefaultIfEmpty()
-                       join maison  in _context.Maisons
+                       join maison in _context.Maisons
                        on article.Maisons_ID equals maison.ID into maisonGroup
                        from maison in maisonGroup.DefaultIfEmpty()
+                       join fournisseur in _context.Fournisseurs
+                       on article.Fournisseurs_ID equals fournisseur.ID into fournisseurGroup
+                       from fournisseur in fournisseurGroup.DefaultIfEmpty()                   
                        select new
                        {
                            article.ID,
@@ -48,7 +51,8 @@ using System.Text.Json;
                            article.Annee,
                            article.Image,
                            famille,
-                           maison
+                           maison,
+                           fournisseur
                        };
 
             if (data.Any()) {
@@ -73,6 +77,9 @@ using System.Text.Json;
                        join maison in _context.Maisons
                        on article.Maisons_ID equals maison.ID into maisonGroup
                        from maison in maisonGroup.DefaultIfEmpty()
+                       join fournisseur in _context.Fournisseurs
+                       on article.Fournisseurs_ID equals fournisseur.ID into fournisseurGroup
+                       from fournisseur in fournisseurGroup.DefaultIfEmpty()
                        select new
                        {
                            article.ID,
@@ -85,7 +92,8 @@ using System.Text.Json;
                            article.Annee,
                            article.Image,
                            famille,
-                           maison
+                           maison,
+                           fournisseur
                        };
 
 
@@ -124,6 +132,7 @@ using System.Text.Json;
             existingArticle.Description = article.Description;
             existingArticle.Familles_ID = article.Familles_ID;
             existingArticle.Maisons_ID = article.Maisons_ID;
+            existingArticle.Fournisseurs_ID = article.Fournisseurs_ID;
 
             try {
 

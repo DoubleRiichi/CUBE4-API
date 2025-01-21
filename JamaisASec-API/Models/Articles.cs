@@ -14,5 +14,7 @@ public class Articles
 
     public int Familles_ID { get; set; }
     public int Maisons_ID { get; set; }
+    public int Fournisseurs_ID { get; set; }
+
 
 }
