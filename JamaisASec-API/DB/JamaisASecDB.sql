@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 21, 2025 at 11:25 AM
+-- Generation Time: Jan 21, 2025 at 02:49 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -42,7 +42,7 @@ CREATE TABLE `articles` (
   `description` text DEFAULT NULL,
   `familles_id` int(10) UNSIGNED DEFAULT NULL,
   `maisons_id` int(10) UNSIGNED DEFAULT NULL,
-  `fournisseurs_id` int(10) UNSIGNED DEFAULT NULL
+  `fournisseurs_id` int(11) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -59,6 +59,7 @@ INSERT INTO `articles` (`id`, `nom`, `quantite`, `image`, `prix_unitaire`, `coli
 (9, 'Maison Ruinart Blanc de Blancs', 200, 'ruinart_blanc.jpg', 70, 12, 6, 2022, 'Champagne elegant avec des aromes de citron et de fleurs blanches.', 4, 9, 3),
 (10, 'Chateau Cheval Blanc 2018', 60, 'cheval_blanc_2018.jpg', 1200, 6, 1, 2018, 'Vin rouge intense aux notes de fruits noirs et d epices.', 1, 10, 5);
 
+
 -- --------------------------------------------------------
 
 --
@@ -72,10 +73,6 @@ CREATE TABLE `articlescommandes` (
   `commandes_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `articlescommandes`
---
-
 INSERT INTO `articlescommandes` (`id`, `articles_id`, `commandes_id`) VALUES
 (1, 4, 1),
 (2, 6, 6),
@@ -88,7 +85,6 @@ INSERT INTO `articlescommandes` (`id`, `articles_id`, `commandes_id`) VALUES
 (12, 4, 9),
 (13, 4, 10),
 (14, 4, 9);
-
 -- --------------------------------------------------------
 
 --
@@ -104,10 +100,6 @@ CREATE TABLE `clients` (
   `telephone` varchar(12) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `clients`
---
-
 INSERT INTO `clients` (`id`, `nom`, `adresse`, `mail`, `telephone`) VALUES
 (1, 'Caviste Parisien', '15 rue de la Vigne, Paris', 'caviste.paris@gmail.com', '0142234455'),
 (2, 'Restaurant etoile', '12 avenue des Grands Crus, Lyon', 'etoile.lyon@gmail.com', '0478223344'),
@@ -119,6 +111,7 @@ INSERT INTO `clients` (`id`, `nom`, `adresse`, `mail`, `telephone`) VALUES
 (8, 'Boutique Vinotheque', '6 avenue des Cepages, Strasbourg', 'vinotheque.strasbourg@gmail.com', '0388123345'),
 (9, 'Particulier Passionne', '18 rue des Amateurs, Nice', 'particulier.nice@gmail.com', '0493145567'),
 (10, 'Organisation evenementielle', '5 rue des Receptions, Nantes', 'events.nantes@gmail.com', '0256341122');
+
 
 -- --------------------------------------------------------
 
@@ -132,24 +125,24 @@ CREATE TABLE `commandes` (
   `reference` varchar(16) NOT NULL,
   `date` datetime NOT NULL,
   `status` varchar(30) DEFAULT NULL,
-  `clients_id` int(10) UNSIGNED DEFAULT NULL
+  `clients_id` int(10) UNSIGNED DEFAULT NULL,
+  `fournisseurs_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `commandes`
---
+INSERT INTO `commandes` (`id`, `reference`, `date`, `status`, `clients_id`,  `fournisseurs_id`) VALUES
+(1, 'CMD001', '2024-11-01 10:00:00', 'En attente', 1, NULL),
+(3, 'CMD003', '2024-11-03 14:00:00', 'Livree', 3, NULL),
+(4, 'CMD004', '2024-11-04 16:00:00', 'Annulee', 4, NULL),
+(5, 'CMD005', '2024-11-05 18:00:00', 'En attente', 5, NULL),
+(6, 'CMD006', '2024-11-06 20:00:00', 'Livree', 6, NULL),
+(7, 'CMD007', '2024-11-07 22:00:00', 'Confirmee', 7, NULL),
+(8, 'CMD008', '2024-11-08 08:00:00', 'Livree', 8, NULL),
+(9, 'CMD009', '2024-11-09 11:00:00', 'En attente', 9, NULL),
+(10, 'CMD010', '2024-11-10 15:00:00', 'Confirmee', 10, NULL),
+(11, 'CMD008', '2024-11-08 08:00:00', 'Livree', NULL, 1),
+(12, 'CMD009', '2024-11-09 11:00:00', 'En attente', NULL, 2),
+(13, 'CMD010', '2024-11-10 15:00:00', 'Confirmee', NULL, 3);
 
-INSERT INTO `commandes` (`id`, `reference`, `date`, `status`, `clients_id`) VALUES
-(1, 'CMD001', '2024-11-01 10:00:00', 'En attente', 1),
-(3, 'CMD003', '2024-11-03 14:00:00', 'Livree', 3),
-(4, 'CMD004', '2024-11-04 16:00:00', 'Annulee', 4),
-(5, 'CMD005', '2024-11-05 18:00:00', 'En attente', 5),
-(6, 'CMD006', '2024-11-06 20:00:00', 'Livree', 6),
-(7, 'CMD007', '2024-11-07 22:00:00', 'Confirmee', 7),
-(8, 'CMD008', '2024-11-08 08:00:00', 'Livree', 8),
-(9, 'CMD009', '2024-11-09 11:00:00', 'En attente', 9),
-(10, 'CMD010', '2024-11-10 15:00:00', 'Confirmee', 10),
-(12, 'test', '2024-12-20 11:23:46', 'test', 6);
 
 -- --------------------------------------------------------
 
@@ -163,9 +156,6 @@ CREATE TABLE `familles` (
   `nom` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `familles`
---
 
 INSERT INTO `familles` (`id`, `nom`) VALUES
 (1, 'Rouge'),
@@ -178,7 +168,6 @@ INSERT INTO `familles` (`id`, `nom`) VALUES
 (8, 'Vin naturel'),
 (9, 'Vin primeur'),
 (10, 'Vin de garde');
-
 -- --------------------------------------------------------
 
 --
@@ -194,10 +183,6 @@ CREATE TABLE `fournisseurs` (
   `telephone` varchar(12) DEFAULT NULL,
   `SIRET` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `fournisseurs`
---
 
 INSERT INTO `fournisseurs` (`id`, `nom`, `adresse`, `mail`, `telephone`, `SIRET`) VALUES
 (1, 'Maison Bordeaux Sud', '34 rue des Graves, Bordeaux', 'contact@bordeauxsud.fr', '0556341122', '11223344556677'),
@@ -223,10 +208,6 @@ CREATE TABLE `maisons` (
   `nom` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `maisons`
---
-
 INSERT INTO `maisons` (`id`, `nom`) VALUES
 (1, 'Chateau Margaux'),
 (2, 'Domaine de la Romanee-Conti'),
@@ -238,7 +219,6 @@ INSERT INTO `maisons` (`id`, `nom`) VALUES
 (8, 'Chateau Haut-Brion'),
 (9, 'Maison Ruinart'),
 (10, 'Chateau Cheval Blanc');
-
 --
 -- Indexes for dumped tables
 --
@@ -271,7 +251,8 @@ ALTER TABLE `clients`
 --
 ALTER TABLE `commandes`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `commandes_ibfk_2` (`clients_id`);
+  ADD KEY `clients_id` (`clients_id`),
+  ADD KEY `fournisseurs_id` (`fournisseurs_id`);
 
 --
 -- Indexes for table `familles`
@@ -299,43 +280,43 @@ ALTER TABLE `maisons`
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `articlescommandes`
 --
 ALTER TABLE `articlescommandes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `commandes`
 --
 ALTER TABLE `commandes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `familles`
 --
 ALTER TABLE `familles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `fournisseurs`
 --
 ALTER TABLE `fournisseurs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `maisons`
 --
 ALTER TABLE `maisons`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -360,7 +341,8 @@ ALTER TABLE `articlescommandes`
 -- Constraints for table `commandes`
 --
 ALTER TABLE `commandes`
-  ADD CONSTRAINT `commandes_ibfk_2` FOREIGN KEY (`clients_id`) REFERENCES `clients` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `commandes_ibfk_1` FOREIGN KEY (`clients_id`) REFERENCES `clients` (`id`),
+  ADD CONSTRAINT `commandes_ibfk_2` FOREIGN KEY (`fournisseurs_id`) REFERENCES `fournisseurs` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

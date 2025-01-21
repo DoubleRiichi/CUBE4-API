@@ -23,13 +23,17 @@ namespace JamaisASec.Controllers
                        join client in _context.Clients
                             on commande.Clients_ID equals client.ID into ClientGroup
                        from client in ClientGroup.DefaultIfEmpty()
+                       join fournisseur in _context.Fournisseurs
+                            on commande.Fournisseurs_id equals fournisseur.ID into fournisseurGroup
+                       from fournisseur in fournisseurGroup.DefaultIfEmpty()
                        select new
                        {
                            commande.ID,
                            commande.Reference,
                            commande.Date,
                            commande.Status,
-                           client
+                           client,
+                           fournisseur
                        };
 
 
@@ -50,6 +54,9 @@ namespace JamaisASec.Controllers
                        join client in _context.Clients
                             on commande.Clients_ID equals client.ID into ClientGroup
                        from client in ClientGroup.DefaultIfEmpty()
+                       join fournisseur in _context.Fournisseurs
+                            on commande.Fournisseurs_id equals fournisseur.ID into fournisseurGroup
+                       from fournisseur in fournisseurGroup.DefaultIfEmpty()
                        select new 
                        { 
                            commande.ID,
@@ -57,6 +64,7 @@ namespace JamaisASec.Controllers
                            commande.Date,
                            commande.Status,
                            client, 
+                           fournisseur,
                        };
 
 
@@ -110,6 +118,7 @@ namespace JamaisASec.Controllers
             existingCommande.Date = commande.Date;
             existingCommande.Status = commande.Status;
             existingCommande.Clients_ID = commande.Clients_ID;
+            existingCommande.Fournisseurs_id = commande.Fournisseurs_id;
 
             try
             {
