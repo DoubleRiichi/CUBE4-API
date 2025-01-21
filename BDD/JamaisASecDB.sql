@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2024 at 12:00 PM
+-- Generation Time: Jan 21, 2025 at 11:25 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `jamaisasecdb`
 --
+CREATE DATABASE IF NOT EXISTS `jamaisasecdb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `jamaisasecdb`;
 
 -- --------------------------------------------------------
 
@@ -27,6 +29,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `articles`
 --
 
+DROP TABLE IF EXISTS `articles`;
 CREATE TABLE `articles` (
   `id` int(10) UNSIGNED NOT NULL,
   `nom` varchar(200) NOT NULL,
@@ -38,24 +41,23 @@ CREATE TABLE `articles` (
   `annee` int(10) UNSIGNED NOT NULL,
   `description` text DEFAULT NULL,
   `familles_id` int(10) UNSIGNED DEFAULT NULL,
-  `maisons_id` int(10) UNSIGNED DEFAULT NULL
+  `maisons_id` int(10) UNSIGNED DEFAULT NULL,
+  `fournisseurs_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `articles`
 --
 
-INSERT INTO `articles` (`id`, `nom`, `quantite`, `image`, `prix_unitaire`, `colisage`, `quantite_min`, `annee`, `description`, `familles_id`, `maisons_id`) VALUES
-(1, 'Chateau Margaux 2015', 120, 'margaux_2015.jpg', 1200, 6, 1, 2015, 'Vin rouge elegant aux aromes de fruits rouges et notes boisees.', 1, 1),
-(2, 'Romanee-Conti 2018', 50, 'romanee_conti_2018.jpg', 20000, 1, 1, 2018, 'Un vin mythique, riche et complexe.', 1, 2),
-(3, 'Maison Mumm Cordon Rouge', 200, 'mumm_cordon_rouge.jpg', 35, 12, 6, 2023, 'Champagne brut aux notes de pomme et de brioche.', 4, 3),
-(4, 'Chateau d Yquem 2010', 30, 'yquem_2010.jpg', 300, 6, 1, 2010, 'Vin doux liquoreux avec des aromes de miel et de fruits exotiques.', 5, 4),
-(5, 'Chateau Petrus 2012', 20, 'petrus_2012.jpg', 3000, 3, 1, 2012, 'Vin rouge exceptionnel avec des notes de prune et de truffe.', 1, 5),
-(6, 'Domaine Leroy Bourgogne Blanc 2020', 100, 'leroy_blanc_2020.jpg', 150, 6, 2, 2020, 'Vin blanc bio aux aromes floraux et mineraux.', 2, 6),
-(7, 'Domaine Leflaive Puligny-Montrachet 2019', 80, 'leflaive_puligny_2019.jpg', 450, 6, 1, 2019, 'Vin blanc complexe avec une belle acidite et des notes de noisette.', 2, 7),
-(8, 'Chateau Haut-Brion 2016', 150, 'haut_brion_2016.jpg', 900, 6, 1, 2016, 'Vin rouge equilibre avec des tanins soyeux et des notes de cassis.', 1, 8),
-(9, 'Maison Ruinart Blanc de Blancs', 200, 'ruinart_blanc.jpg', 70, 12, 6, 2022, 'Champagne elegant avec des aromes de citron et de fleurs blanches.', 4, 9),
-(10, 'Chateau Cheval Blanc 2018', 60, 'cheval_blanc_2018.jpg', 1200, 6, 1, 2018, 'Vin rouge intense aux notes de fruits noirs et d epices.', 1, 10);
+INSERT INTO `articles` (`id`, `nom`, `quantite`, `image`, `prix_unitaire`, `colisage`, `quantite_min`, `annee`, `description`, `familles_id`, `maisons_id`, `fournisseurs_id`) VALUES
+(3, 'Maison Mumm Cordon Rouge', 200, 'mumm_cordon_rouge.jpg', 35, 12, 6, 2023, 'Champagne brut aux notes de pomme et de brioche.', 4, 3, 2),
+(4, 'Chateau d Yquem 2010', 30, 'yquem_2010.jpg', 300, 6, 1, 2010, 'Vin doux liquoreux avec des aromes de miel et de fruits exotiques.', 5, 4, 2),
+(5, 'Chateau Petrus 2012', 20, 'petrus_2012.jpg', 3000, 3, 1, 2012, 'Vin rouge exceptionnel avec des notes de prune et de truffe.', 1, 5, 1),
+(6, 'Domaine Leroy Bourgogne Blanc 2020', 100, 'leroy_blanc_2020.jpg', 150, 6, 2, 2020, 'Vin blanc bio aux aromes floraux et mineraux.', 2, 6, 3),
+(7, 'Domaine Leflaive Puligny-Montrachet 2019', 80, 'leflaive_puligny_2019.jpg', 450, 6, 1, 2019, 'Vin blanc complexe avec une belle acidite et des notes de noisette.', 2, 7, 4),
+(8, 'Chateau Haut-Brion 2016', 150, 'haut_brion_2016.jpg', 900, 6, 1, 2016, 'Vin rouge equilibre avec des tanins soyeux et des notes de cassis.', 1, 8, 2),
+(9, 'Maison Ruinart Blanc de Blancs', 200, 'ruinart_blanc.jpg', 70, 12, 6, 2022, 'Champagne elegant avec des aromes de citron et de fleurs blanches.', 4, 9, 3),
+(10, 'Chateau Cheval Blanc 2018', 60, 'cheval_blanc_2018.jpg', 1200, 6, 1, 2018, 'Vin rouge intense aux notes de fruits noirs et d epices.', 1, 10, 5);
 
 -- --------------------------------------------------------
 
@@ -63,6 +65,7 @@ INSERT INTO `articles` (`id`, `nom`, `quantite`, `image`, `prix_unitaire`, `coli
 -- Table structure for table `articlescommandes`
 --
 
+DROP TABLE IF EXISTS `articlescommandes`;
 CREATE TABLE `articlescommandes` (
   `id` int(10) UNSIGNED NOT NULL,
   `articles_id` int(10) UNSIGNED DEFAULT NULL,
@@ -78,10 +81,7 @@ INSERT INTO `articlescommandes` (`id`, `articles_id`, `commandes_id`) VALUES
 (2, 6, 6),
 (3, 4, 1),
 (4, 6, 6),
-(5, 5, 2),
-(6, 2, 3),
 (7, 3, 5),
-(8, 1, 4),
 (9, 3, 6),
 (10, 8, 7),
 (11, 9, 8),
@@ -95,6 +95,7 @@ INSERT INTO `articlescommandes` (`id`, `articles_id`, `commandes_id`) VALUES
 -- Table structure for table `clients`
 --
 
+DROP TABLE IF EXISTS `clients`;
 CREATE TABLE `clients` (
   `id` int(10) UNSIGNED NOT NULL,
   `nom` varchar(200) NOT NULL,
@@ -125,30 +126,30 @@ INSERT INTO `clients` (`id`, `nom`, `adresse`, `mail`, `telephone`) VALUES
 -- Table structure for table `commandes`
 --
 
+DROP TABLE IF EXISTS `commandes`;
 CREATE TABLE `commandes` (
   `id` int(10) UNSIGNED NOT NULL,
   `reference` varchar(16) NOT NULL,
   `date` datetime NOT NULL,
   `status` varchar(30) DEFAULT NULL,
-  `clients_id` int(10) UNSIGNED DEFAULT NULL,
-  `fournisseurs_id` int(10) UNSIGNED DEFAULT NULL
+  `clients_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `commandes`
 --
 
-INSERT INTO `commandes` (`id`, `reference`, `date`, `status`, `clients_id`, `fournisseurs_id`) VALUES
-(1, 'CMD001', '2024-11-01 10:00:00', 'En attente', 1, 1),
-(2, 'CMD002', '2024-11-02 12:00:00', 'Confirmee', 2, 2),
-(3, 'CMD003', '2024-11-03 14:00:00', 'Livree', 3, 3),
-(4, 'CMD004', '2024-11-04 16:00:00', 'Annulee', 4, 4),
-(5, 'CMD005', '2024-11-05 18:00:00', 'En attente', 5, 5),
-(6, 'CMD006', '2024-11-06 20:00:00', 'Livree', 6, 6),
-(7, 'CMD007', '2024-11-07 22:00:00', 'Confirmee', 7, 7),
-(8, 'CMD008', '2024-11-08 08:00:00', 'Livree', 8, 8),
-(9, 'CMD009', '2024-11-09 11:00:00', 'En attente', 9, 9),
-(10, 'CMD010', '2024-11-10 15:00:00', 'Confirmee', 10, 10);
+INSERT INTO `commandes` (`id`, `reference`, `date`, `status`, `clients_id`) VALUES
+(1, 'CMD001', '2024-11-01 10:00:00', 'En attente', 1),
+(3, 'CMD003', '2024-11-03 14:00:00', 'Livree', 3),
+(4, 'CMD004', '2024-11-04 16:00:00', 'Annulee', 4),
+(5, 'CMD005', '2024-11-05 18:00:00', 'En attente', 5),
+(6, 'CMD006', '2024-11-06 20:00:00', 'Livree', 6),
+(7, 'CMD007', '2024-11-07 22:00:00', 'Confirmee', 7),
+(8, 'CMD008', '2024-11-08 08:00:00', 'Livree', 8),
+(9, 'CMD009', '2024-11-09 11:00:00', 'En attente', 9),
+(10, 'CMD010', '2024-11-10 15:00:00', 'Confirmee', 10),
+(12, 'test', '2024-12-20 11:23:46', 'test', 6);
 
 -- --------------------------------------------------------
 
@@ -156,6 +157,7 @@ INSERT INTO `commandes` (`id`, `reference`, `date`, `status`, `clients_id`, `fou
 -- Table structure for table `familles`
 --
 
+DROP TABLE IF EXISTS `familles`;
 CREATE TABLE `familles` (
   `id` int(10) UNSIGNED NOT NULL,
   `nom` varchar(200) NOT NULL
@@ -183,6 +185,7 @@ INSERT INTO `familles` (`id`, `nom`) VALUES
 -- Table structure for table `fournisseurs`
 --
 
+DROP TABLE IF EXISTS `fournisseurs`;
 CREATE TABLE `fournisseurs` (
   `id` int(10) UNSIGNED NOT NULL,
   `nom` varchar(200) NOT NULL,
@@ -214,6 +217,7 @@ INSERT INTO `fournisseurs` (`id`, `nom`, `adresse`, `mail`, `telephone`, `SIRET`
 -- Table structure for table `maisons`
 --
 
+DROP TABLE IF EXISTS `maisons`;
 CREATE TABLE `maisons` (
   `id` int(10) UNSIGNED NOT NULL,
   `nom` varchar(200) NOT NULL
@@ -245,7 +249,8 @@ INSERT INTO `maisons` (`id`, `nom`) VALUES
 ALTER TABLE `articles`
   ADD PRIMARY KEY (`id`),
   ADD KEY `articles_ibfk_1` (`familles_id`),
-  ADD KEY `articles_ibfk_2` (`maisons_id`);
+  ADD KEY `articles_ibfk_2` (`maisons_id`),
+  ADD KEY `articles_ibfk_3` (`fournisseurs_id`);
 
 --
 -- Indexes for table `articlescommandes`
@@ -266,8 +271,7 @@ ALTER TABLE `clients`
 --
 ALTER TABLE `commandes`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `commandes_ibfk_2` (`clients_id`),
-  ADD KEY `commandes_ibfk_3` (`fournisseurs_id`);
+  ADD KEY `commandes_ibfk_2` (`clients_id`);
 
 --
 -- Indexes for table `familles`
@@ -313,7 +317,7 @@ ALTER TABLE `clients`
 -- AUTO_INCREMENT for table `commandes`
 --
 ALTER TABLE `commandes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `familles`
@@ -342,7 +346,8 @@ ALTER TABLE `maisons`
 --
 ALTER TABLE `articles`
   ADD CONSTRAINT `articles_ibfk_1` FOREIGN KEY (`familles_id`) REFERENCES `familles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `articles_ibfk_2` FOREIGN KEY (`maisons_id`) REFERENCES `maisons` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `articles_ibfk_2` FOREIGN KEY (`maisons_id`) REFERENCES `maisons` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `articles_ibfk_3` FOREIGN KEY (`fournisseurs_id`) REFERENCES `fournisseurs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `articlescommandes`
@@ -355,8 +360,7 @@ ALTER TABLE `articlescommandes`
 -- Constraints for table `commandes`
 --
 ALTER TABLE `commandes`
-  ADD CONSTRAINT `commandes_ibfk_2` FOREIGN KEY (`clients_id`) REFERENCES `clients` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `commandes_ibfk_3` FOREIGN KEY (`fournisseurs_id`) REFERENCES `fournisseurs` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `commandes_ibfk_2` FOREIGN KEY (`clients_id`) REFERENCES `clients` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
