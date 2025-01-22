@@ -69,22 +69,23 @@ INSERT INTO `articles` (`id`, `nom`, `quantite`, `image`, `prix_unitaire`, `coli
 DROP TABLE IF EXISTS `articlescommandes`;
 CREATE TABLE `articlescommandes` (
   `id` int(10) UNSIGNED NOT NULL,
+  `quantite` int(10) UNSIGNED NOT NULL,
   `articles_id` int(10) UNSIGNED DEFAULT NULL,
   `commandes_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `articlescommandes` (`id`, `articles_id`, `commandes_id`) VALUES
-(1, 4, 1),
-(2, 6, 6),
-(3, 4, 1),
-(4, 6, 6),
-(7, 3, 5),
-(9, 3, 6),
-(10, 8, 7),
-(11, 9, 8),
-(12, 4, 9),
-(13, 4, 10),
-(14, 4, 9);
+INSERT INTO `articlescommandes` (`id`, `quantite`, `articles_id`, `commandes_id`) VALUES
+(1, 2, 4, 1),
+(2, 2, 6, 6),
+(3, 1, 4, 1),
+(4, 10, 6, 6),
+(7, 5, 3, 5),
+(9, 1, 3, 6),
+(10, 1, 8, 7),
+(11, 2, 9, 8),
+(12, 60, 4, 9),
+(13, 3, 4, 10),
+(14, 5, 4, 9);
 -- --------------------------------------------------------
 
 --

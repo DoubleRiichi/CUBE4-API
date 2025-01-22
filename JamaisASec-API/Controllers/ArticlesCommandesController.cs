@@ -38,6 +38,7 @@ namespace JamaisASec.Controllers
                        from commande in commandeGroup.DefaultIfEmpty()
                        select new 
                        {    articlecommande.ID, 
+                            articlecommande.Quantite,
                             article, 
                             commande
                        };
@@ -68,8 +69,44 @@ namespace JamaisASec.Controllers
                        select new
                        {
                            articlecommande.ID,
+                           articlecommande.Quantite,
                            article,
                            commande
+                       };
+
+
+
+            if (data.Any())
+            {
+                return Ok(data);
+            }
+
+            return NotFound();
+        }
+
+        [HttpGet]
+        [Route("[controller]/get/command/{id}")]
+        public ActionResult GetByCommandId(int id)
+        {
+
+            var data = from articlecommande in _context.ArticlesCommandes
+                       join article in _context.Articles
+                            on articlecommande.Articles_ID equals article.ID into ArticleGroup
+                       from article in ArticleGroup.DefaultIfEmpty()
+                       join commande in _context.Commandes
+                       on articlecommande.Commandes_ID equals commande.ID into commandeGroup
+                       from commande in commandeGroup.DefaultIfEmpty()
+                       where articlecommande.Commandes_ID == id
+                       group new {articlecommande, article, commande} by articlecommande.Commandes_ID into grouped
+                       select new
+                       {
+                           commande = grouped.FirstOrDefault().commande,
+                           articles = grouped.Select(g => new
+                           {
+                               g.articlecommande.ID,
+                               g.articlecommande.Quantite,
+                               g.article
+                           }).ToList()
                        };
 
 
