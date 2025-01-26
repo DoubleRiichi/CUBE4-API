@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using JamaisASec.Models;
 using System.Linq;
+using System.Net.Http;
+using System.Text.Json;
 
 namespace JamaisASec.Controllers
 {
@@ -73,6 +75,50 @@ namespace JamaisASec.Controllers
                 return Ok(data);
             }
 
+
+            return NotFound();
+        }
+
+        [HttpGet]
+        [Route("get/byClient/{clientId}")]
+        public ActionResult GetCommandesByClientId(int clientId)
+        {
+            var data = from commande in _context.Commandes
+                       where commande.Clients_ID == clientId
+                       select new
+                       {
+                           commande.ID,
+                           commande.Reference,
+                           commande.Date,
+                           commande.Status
+                       };
+
+            if (data.Any())
+            {
+                return Ok(data);
+            }
+
+            return NotFound();
+        }
+
+        [HttpGet]
+        [Route("get/byFournisseur/{fournisseurId}")]
+        public ActionResult GetCommandesByFournisseurId(int fournisseurId)
+        {
+            var data = from commande in _context.Commandes
+                       where commande.Fournisseurs_id == fournisseurId
+                       select new
+                       {
+                           commande.ID,
+                           commande.Reference,
+                           commande.Date,
+                           commande.Status
+                       };
+
+            if (data.Any())
+            {
+                return Ok(data);
+            }
 
             return NotFound();
         }
