@@ -131,18 +131,18 @@ CREATE TABLE `commandes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `commandes` (`id`, `reference`, `date`, `status`, `clients_id`,  `fournisseurs_id`) VALUES
-(1, 'CMD001', '2024-11-01 10:00:00', 'En attente', 1, NULL),
+(1, 'CMD001', '2024-11-01 10:00:00', 'En cours', 1, NULL),
 (3, 'CMD003', '2024-11-03 14:00:00', 'Livree', 3, NULL),
 (4, 'CMD004', '2024-11-04 16:00:00', 'Annulee', 4, NULL),
-(5, 'CMD005', '2024-11-05 18:00:00', 'En attente', 5, NULL),
+(5, 'CMD005', '2024-11-05 18:00:00', 'En cours', 5, NULL),
 (6, 'CMD006', '2024-11-06 20:00:00', 'Livree', 6, NULL),
 (7, 'CMD007', '2024-11-07 22:00:00', 'Confirmee', 7, NULL),
 (8, 'CMD008', '2024-11-08 08:00:00', 'Livree', 8, NULL),
-(9, 'CMD009', '2024-11-09 11:00:00', 'En attente', 9, NULL),
-(10, 'CMD010', '2024-11-10 15:00:00', 'Confirmee', 10, NULL),
-(11, 'CMD008', '2024-11-08 08:00:00', 'Livree', NULL, 1),
+(9, 'CMD009', '2024-11-09 11:00:00', 'En cours', 9, NULL),
+(10, 'CMD010', '2024-11-10 15:00:00', 'Livree', 10, NULL),
+(11, 'CMD008', '2024-11-08 08:00:00', 'Receptionnee', NULL, 1),
 (12, 'CMD009', '2024-11-09 11:00:00', 'En attente', NULL, 2),
-(13, 'CMD010', '2024-11-10 15:00:00', 'Confirmee', NULL, 3);
+(13, 'CMD010', '2024-11-10 15:00:00', 'Receptionnee', NULL, 3);
 
 
 -- --------------------------------------------------------
