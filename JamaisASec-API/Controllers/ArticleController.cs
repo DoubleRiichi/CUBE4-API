@@ -152,6 +152,12 @@ using System.Text.Json;
         public IActionResult Create([FromBody] Articles article)
         {
             try {
+
+                //if (article.Fournisseurs_ID == 0)
+                //{
+                //    article.Fournisseurs_ID = 1; 
+                //}
+
                 _context.Articles.Add(article);
                 _context.SaveChanges();
                 return CreatedAtAction(nameof(GetAll), new { id = article.ID }, article);
