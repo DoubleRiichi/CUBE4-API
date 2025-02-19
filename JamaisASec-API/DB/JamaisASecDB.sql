@@ -128,7 +128,7 @@ CREATE TABLE `clients` (
   `nom` varchar(200) NOT NULL,
   `adresse` varchar(400) DEFAULT NULL,
   `mail` varchar(320) DEFAULT NULL,
-  `mot_de_passe` varchar(15) NOT NULL,
+  `mot_de_passe` varchar(500) NOT NULL,
   `telephone` varchar(12) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
