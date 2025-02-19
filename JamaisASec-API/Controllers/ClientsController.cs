@@ -70,12 +70,13 @@ namespace JamaisASec.Controllers
 
             try
             {
+
                 client.Mot_De_Passe = BCrypt.Net.BCrypt.EnhancedHashPassword(client.Mot_De_Passe);
                 _context.Clients.Add(client);
                 _context.SaveChanges();
+                
                 return CreatedAtAction(nameof(GetById), new { id = client.ID }, client);
-            } catch (Exception ex)
-            {
+            } catch (Exception ex) {
 
                 return StatusCode(500);
             }
@@ -97,10 +98,19 @@ namespace JamaisASec.Controllers
                 return NotFound();
             }
 
+
+
             existingClient.Nom = client.Nom;
             existingClient.Adresse = client.Adresse;
             existingClient.Mail = client.Mail;
-            existingClient.Mot_De_Passe = BCrypt.Net.BCrypt.EnhancedHashPassword(client.Mot_De_Passe);
+
+            // if not null or empty
+            if (!String.IsNullOrEmpty(client.Mot_De_Passe))
+            {
+                existingClient.Mot_De_Passe = BCrypt.Net.BCrypt.EnhancedHashPassword(client.Mot_De_Passe);
+
+            }
+
             existingClient.Telephone = client.Telephone;
 
             try {
