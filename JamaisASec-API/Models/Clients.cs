@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace JamaisASec.Models;
 public class Clients {
     public int ID { get; set; }

@@ -19,7 +19,16 @@ namespace JamaisASec.Controllers
         [Route("get/all")]
         public ActionResult GetAll()
         {
-            var data = _context.Clients.ToList();
+            //Pour omettre le champs "mot_de_passe" par soucis de sécurité.
+            var data = _context.Clients.Select(client => new
+            {
+                client.ID,
+                client.Nom,
+                client.Adresse,
+                client.Mail,
+                client.Telephone
+            }).ToList();
+
 
             if(data.Any()) {
                 return Ok(data);
@@ -39,7 +48,15 @@ namespace JamaisASec.Controllers
                 return NotFound();
             }
 
-            return Ok(client);
+            return Ok(new
+            {
+                client.ID,
+                client.Nom,
+                client.Adresse,
+                client.Mail,
+                client.Telephone,
+
+            });
         }
 
         [HttpPost]
@@ -53,6 +70,7 @@ namespace JamaisASec.Controllers
 
             try
             {
+                client.Mot_De_Passe = BCrypt.Net.BCrypt.EnhancedHashPassword(client.Mot_De_Passe);
                 _context.Clients.Add(client);
                 _context.SaveChanges();
                 return CreatedAtAction(nameof(GetById), new { id = client.ID }, client);
@@ -82,7 +100,7 @@ namespace JamaisASec.Controllers
             existingClient.Nom = client.Nom;
             existingClient.Adresse = client.Adresse;
             existingClient.Mail = client.Mail;
-            existingClient.Mot_De_Passe = client.Mot_De_Passe;
+            existingClient.Mot_De_Passe = BCrypt.Net.BCrypt.EnhancedHashPassword(client.Mot_De_Passe);
             existingClient.Telephone = client.Telephone;
 
             try {
