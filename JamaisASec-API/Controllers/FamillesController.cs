@@ -89,7 +89,6 @@ namespace JamaisASec.Controllers
             {
                 return StatusCode(500); // 500 = internal server error 
             }
-
         }
 
         [HttpDelete]

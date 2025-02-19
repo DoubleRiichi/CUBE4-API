@@ -87,12 +87,13 @@ namespace JamaisASec.Controllers
         [Route("update/{id}")]
         public IActionResult Update(int id, [FromBody] Clients client)
         {
-            if (client == null || client.ID != id)
+            if (client == null)
             {
                 return BadRequest();
             }
 
             var existingClient = _context.Clients.Find(id);
+
             if (existingClient == null)
             {
                 return NotFound();
