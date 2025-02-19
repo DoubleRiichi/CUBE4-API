@@ -4,12 +4,7 @@ using JamaisASec.Models;
 using System.Text.Json;
 
 
-
-    namespace JamaisASec.Controllers
-
-
-
-{
+namespace JamaisASec.Controllers {
     [ApiController]
     public class ArticlesController : ControllerBase
     {
