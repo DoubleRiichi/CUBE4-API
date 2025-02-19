@@ -19,6 +19,7 @@ namespace JamaisASec_API.Controllers
         }
 
         [HttpPost]
+        [Route("/login")]
         public IActionResult Login([FromBody] Auth AuthDetail)
         {
             if(AuthDetail.Email == null || AuthDetail.Password == null)
