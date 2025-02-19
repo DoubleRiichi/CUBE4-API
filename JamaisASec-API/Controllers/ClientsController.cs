@@ -82,6 +82,7 @@ namespace JamaisASec.Controllers
             existingClient.Nom = client.Nom;
             existingClient.Adresse = client.Adresse;
             existingClient.Mail = client.Mail;
+            existingClient.Mot_De_Passe = client.Mot_De_Passe;
             existingClient.Telephone = client.Telephone;
 
             try {

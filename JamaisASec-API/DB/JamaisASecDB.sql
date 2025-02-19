@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 21, 2025 at 02:49 PM
+-- Generation Time: Feb 19, 2025 at 09:57 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -59,7 +59,6 @@ INSERT INTO `articles` (`id`, `nom`, `quantite`, `image`, `prix_unitaire`, `coli
 (9, 'Maison Ruinart Blanc de Blancs', 200, 'ruinart_blanc.jpg', 70, 12, 6, 2022, 'Champagne elegant avec des aromes de citron et de fleurs blanches.', 4, 9, 3),
 (10, 'Chateau Cheval Blanc 2018', 60, 'cheval_blanc_2018.jpg', 1200, 6, 1, 2018, 'Vin rouge intense aux notes de fruits noirs et d epices.', 1, 10, 5);
 
-
 -- --------------------------------------------------------
 
 --
@@ -73,6 +72,10 @@ CREATE TABLE `articlescommandes` (
   `articles_id` int(10) UNSIGNED DEFAULT NULL,
   `commandes_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `articlescommandes`
+--
 
 INSERT INTO `articlescommandes` (`id`, `quantite`, `articles_id`, `commandes_id`) VALUES
 (1, 2, 4, 1),
@@ -112,6 +115,7 @@ INSERT INTO `articlescommandes` (`id`, `quantite`, `articles_id`, `commandes_id`
 (38, 2, 5, 12),
 (39, 1, 7, 13),
 (40, 3, 4, 13);
+
 -- --------------------------------------------------------
 
 --
@@ -124,21 +128,26 @@ CREATE TABLE `clients` (
   `nom` varchar(200) NOT NULL,
   `adresse` varchar(400) DEFAULT NULL,
   `mail` varchar(320) DEFAULT NULL,
+  `mot_de_passe` varchar(15) NOT NULL,
   `telephone` varchar(12) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `clients` (`id`, `nom`, `adresse`, `mail`, `telephone`) VALUES
-(1, 'Caviste Parisien', '15 rue de la Vigne, Paris', 'caviste.paris@gmail.com', '0142234455'),
-(2, 'Restaurant etoile', '12 avenue des Grands Crus, Lyon', 'etoile.lyon@gmail.com', '0478223344'),
-(3, 'Collectionneur Prive', '8 rue des Vins Rares, Bordeaux', 'prive.bordeaux@gmail.com', '0556778899'),
-(4, 'Grande Surface', '1 boulevard du Commerce, Lille', 'gs.lille@gmail.com', '0322984455'),
-(5, 'Exportateur USA', '47 avenue des Vignerons, Marseille', 'export.usa@gmail.com', '0491123344'),
-(6, 'Caviste Bio', '22 rue des Vins Bios, Toulouse', 'bio.toulouse@gmail.com', '0567341234'),
-(7, 'Hotel de Luxe', '9 rue des Sommeliers, Cannes', 'hotel.luxe@gmail.com', '0493945566'),
-(8, 'Boutique Vinotheque', '6 avenue des Cepages, Strasbourg', 'vinotheque.strasbourg@gmail.com', '0388123345'),
-(9, 'Particulier Passionne', '18 rue des Amateurs, Nice', 'particulier.nice@gmail.com', '0493145567'),
-(10, 'Organisation evenementielle', '5 rue des Receptions, Nantes', 'events.nantes@gmail.com', '0256341122');
+--
+-- Dumping data for table `clients`
+--
 
+INSERT INTO `clients` (`id`, `nom`, `adresse`, `mail`, `mot_de_passe`, `telephone`) VALUES
+(1, 'Caviste Parisien', '15 rue de la Vigne, Paris', 'caviste.paris@gmail.com', 'default', '0142234455'),
+(2, 'Restaurant etoile', '12 avenue des Grands Crus, Lyon', 'etoile.lyon@gmail.com', 'default', '0478223344'),
+(3, 'Collectionneur Prive', '8 rue des Vins Rares, Bordeaux', 'prive.bordeaux@gmail.com', 'default', '0556778899'),
+(4, 'Grande Surface', '1 boulevard du Commerce, Lille', 'gs.lille@gmail.com', 'default', '0322984455'),
+(5, 'Exportateur USA', '47 avenue des Vignerons, Marseille', 'export.usa@gmail.com', 'default', '0491123344'),
+(6, 'Caviste Bio', '22 rue des Vins Bios, Toulouse', 'bio.toulouse@gmail.com', 'default', '0567341234'),
+(7, 'Hotel de Luxe', '9 rue des Sommeliers, Cannes', 'hotel.luxe@gmail.com', 'default', '0493945566'),
+(8, 'Boutique Vinotheque', '6 avenue des Cepages, Strasbourg', 'vinotheque.strasbourg@gmail.com', 'default', '0388123345'),
+(9, 'Particulier Passionne', '18 rue des Amateurs, Nice', 'particulier.nice@gmail.com', 'default', '0493145567'),
+(10, 'Organisation evenementielle', '5 rue des Receptions, Nantes', 'events.nantes@gmail.com', 'default', '0256341122'),
+(11, 'Jeans', 'Adresszijdzeijdi', 'test@tes33t.fr', 'default', '+33145786523');
 
 -- --------------------------------------------------------
 
@@ -156,7 +165,11 @@ CREATE TABLE `commandes` (
   `fournisseurs_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `commandes` (`id`, `reference`, `date`, `status`, `clients_id`,  `fournisseurs_id`) VALUES
+--
+-- Dumping data for table `commandes`
+--
+
+INSERT INTO `commandes` (`id`, `reference`, `date`, `status`, `clients_id`, `fournisseurs_id`) VALUES
 (1, 'CMD001', '2024-11-01 10:00:00', 'En cours', 1, NULL),
 (3, 'CMD003', '2024-11-03 14:00:00', 'Livree', 3, NULL),
 (4, 'CMD004', '2024-11-04 16:00:00', 'Annulee', 4, NULL),
@@ -170,7 +183,6 @@ INSERT INTO `commandes` (`id`, `reference`, `date`, `status`, `clients_id`,  `fo
 (12, 'CMD009', '2024-11-09 11:00:00', 'En attente', NULL, 2),
 (13, 'CMD010', '2024-11-10 15:00:00', 'Receptionnee', NULL, 3);
 
-
 -- --------------------------------------------------------
 
 --
@@ -183,6 +195,9 @@ CREATE TABLE `familles` (
   `nom` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `familles`
+--
 
 INSERT INTO `familles` (`id`, `nom`) VALUES
 (1, 'Rouge'),
@@ -195,6 +210,7 @@ INSERT INTO `familles` (`id`, `nom`) VALUES
 (8, 'Vin naturel'),
 (9, 'Vin primeur'),
 (10, 'Vin de garde');
+
 -- --------------------------------------------------------
 
 --
@@ -210,6 +226,10 @@ CREATE TABLE `fournisseurs` (
   `telephone` varchar(12) DEFAULT NULL,
   `SIRET` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `fournisseurs`
+--
 
 INSERT INTO `fournisseurs` (`id`, `nom`, `adresse`, `mail`, `telephone`, `SIRET`) VALUES
 (1, 'Maison Bordeaux Sud', '34 rue des Graves, Bordeaux', 'contact@bordeauxsud.fr', '0556341122', '11223344556677'),
@@ -235,6 +255,10 @@ CREATE TABLE `maisons` (
   `nom` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `maisons`
+--
+
 INSERT INTO `maisons` (`id`, `nom`) VALUES
 (1, 'Chateau Margaux'),
 (2, 'Domaine de la Romanee-Conti'),
@@ -246,6 +270,7 @@ INSERT INTO `maisons` (`id`, `nom`) VALUES
 (8, 'Chateau Haut-Brion'),
 (9, 'Maison Ruinart'),
 (10, 'Chateau Cheval Blanc');
+
 --
 -- Indexes for dumped tables
 --
@@ -307,43 +332,43 @@ ALTER TABLE `maisons`
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `articlescommandes`
 --
 ALTER TABLE `articlescommandes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `commandes`
 --
 ALTER TABLE `commandes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `familles`
 --
 ALTER TABLE `familles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `fournisseurs`
 --
 ALTER TABLE `fournisseurs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `maisons`
 --
 ALTER TABLE `maisons`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
