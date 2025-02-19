@@ -19,7 +19,7 @@ namespace JamaisASec_API.Controllers
         }
 
         [HttpPost]
-        [Route("/login")]
+        [Route("/[controller]/login")]
         public IActionResult Login([FromBody] Auth AuthDetail)
         {
             if(AuthDetail.Email == null || AuthDetail.Password == null)
@@ -41,7 +41,7 @@ namespace JamaisASec_API.Controllers
                     error = "Incorrect credentials"
                 });
             }
-
+            
             bool successfulLogin = BCrypt.Net.BCrypt.EnhancedVerify(AuthDetail.Password, targetClient.Mot_De_Passe);
 
             if (successfulLogin) {
@@ -67,8 +67,6 @@ namespace JamaisASec_API.Controllers
                 });
             }
         }
-
-
 
     }
 }
