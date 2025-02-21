@@ -46,6 +46,4 @@ app.MapControllers();
 //Possible d'ajouter CORS, regarder documentation ASP.NET CORE
 //builder.Services.AddCors(options => {});
 
-app.MapGet("/", () => "Hello World!");
-
 app.Run();
