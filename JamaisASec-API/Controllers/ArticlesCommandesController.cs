@@ -105,6 +105,7 @@ namespace JamaisASec.Controllers
                             {
                                 article.ID,
                                 article.Nom,
+                                article.Colisage,
                                 article.Prix_unitaire
                             }
                        };
@@ -134,6 +135,36 @@ namespace JamaisASec.Controllers
             }
 
 
+        }
+
+
+        [HttpPut]
+        [Route("[controller]/update/{id}")]
+        public IActionResult Update(int id, [FromBody] ArticlesCommandes articlecommande)
+        {
+            if (articlecommande == null || articlecommande.ID != id)
+            {
+                return BadRequest();
+            }
+
+            var existingArticleCommande = _context.ArticlesCommandes.Find(id);
+            if (existingArticleCommande == null)
+            {
+                return NotFound();
+            }
+
+            existingArticleCommande.Quantite = articlecommande.Quantite;
+
+            try
+            {
+                _context.ArticlesCommandes.Update(existingArticleCommande);
+                _context.SaveChanges();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500); // 500 = internal server error
+            }
         }
 
 
