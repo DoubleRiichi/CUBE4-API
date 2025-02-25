@@ -8,8 +8,7 @@ L'API de l'application JamaisASec est conçue pour gérer les opérations de ges
 - **Gestion des Commandes** : Passage de commandes auprès des fournisseurs et gestion des commandes clients.
 - **Gestion d'Inventaire** : Inventaire complet des articles et régularisation des stocks.
 - **Notifications et Alertes** : Génération de notifications pour les niveaux de stock bas ou les commandes urgentes.
-- **Vente en Ligne** : Synchronisation des stocks avec une plateforme de vente en ligne.
-- **Rapports** : Génération de rapports sur les ventes, les stocks, et les fournisseurs.
+- **Vente en Ligne** : Synchronisation des stocks avec le site web.
 
 ## Prérequis
 
@@ -21,5 +20,5 @@ L'API de l'application JamaisASec est conçue pour gérer les opérations de ges
 
 1. **Cloner le dépôt** :
    ```bash
-   git clone https://github.com/votre-utilisateur/JamaisASec-API.git
+   git clone [(https://github.com/DoubleRiichi/CUBE4-API.git)]
    cd JamaisASec-API
