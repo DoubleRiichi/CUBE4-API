@@ -169,13 +169,14 @@ namespace JamaisASec.Controllers
 
 
         [HttpDelete]
-        [Route("delete/{id}")]
+        [Route("[controller]/delete/{id}")]
         public IActionResult Delete(int id)
         {
             var articlecommande = _context.ArticlesCommandes.Find(id);
             if (articlecommande == null) {
                 return NotFound();
             }
+            Console.WriteLine("Found");
 
             try {
                 _context.ArticlesCommandes.Remove(articlecommande);
