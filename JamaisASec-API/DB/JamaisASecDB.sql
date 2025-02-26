@@ -79,7 +79,7 @@ INSERT INTO `articles` (`id`, `nom`, `quantite`, `image`, `prix_unitaire`, `coli
 (27, 'Côte-Rôtie Vieilles Vignes', 38, 'cote_rotie.jpg', 48.00, 6, 1, 2016, 'Un vin rouge puissant et élégant.', 1, 8, 9),
 (28, 'Vin Naturel Rouge Authentique', 40, 'naturel_rouge.jpg', 30.00, 6, 1, 2021, 'Un vin naturel sans sulfites.', 8, 2, 5),
 (29, 'Vin Primeur Fruité', 70, 'vin_primeur.jpg', 15.50, 6, 1, 2023, 'Un primeur léger et fruité.', 9, 1, 3),
-(30, 'Châteauneuf-du-Pape Excellence', 45, 'chateauneuf.jpg', 50.00, 6, 1, 2017, 'Un rouge complexe et structuré.', 1, 8, 9)
+(30, 'Châteauneuf-du-Pape Excellence', 45, 'chateauneuf.jpg', 50.00, 6, 1, 2017, 'Un rouge complexe et structuré.', 1, 8, 9),
 (31, 'Maison Mumm Cordon Rouge', 200, 'mumm_cordon_rouge.jpg', 35, 12, 6, 2023, 'Champagne brut aux notes de pomme et de brioche.', 4, 3, 2),
 (32, 'Chateau d Yquem 2010', 30, 'yquem_2010.jpg', 300, 6, 1, 2010, 'Vin doux liquoreux avec des aromes de miel et de fruits exotiques.', 5, 4, 2),
 (33, 'Chateau Petrus 2012', 20, 'petrus_2012.jpg', 3000, 3, 1, 2012, 'Vin rouge exceptionnel avec des notes de prune et de truffe.', 1, 5, 1),
@@ -210,20 +210,20 @@ CREATE TABLE `commandes` (
 --
 
 INSERT INTO `commandes` (`id`, `reference`, `date`, `status`, `clients_id`, `fournisseurs_id`) VALUES
-(1, 'CMD001', '2024-11-01 10:00:00', 'En cours', 1, NULL),
+(1, 'CMD001', '2024-11-01 10:00:00', 'EnCours', 1, NULL),
 (2, 'CMD002', '2024-11-03 14:00:00', 'Receptionnee', NULL, 2),
-(3, 'CMD003', '2024-11-03 16:00:00', 'En cours', NULL, 1),
+(3, 'CMD003', '2024-11-03 16:00:00', 'EnCours', NULL, 1),
 (4, 'CMD004', '2024-11-04 16:00:00', 'Annulee', 4, NULL),
-(5, 'CMD005', '2024-11-05 18:00:00', 'En cours', 5, NULL),
+(5, 'CMD005', '2024-11-05 18:00:00', 'EnCours', 5, NULL),
 (6, 'CMD006', '2024-11-06 20:00:00', 'Livree', 6, NULL),
-(7, 'CMD007', '2024-11-07 22:00:00', 'Confirmee', 7, NULL),
+(7, 'CMD007', '2024-11-07 22:00:00', 'Prete', 7, NULL),
 (8, 'CMD008', '2024-11-08 08:00:00', 'Livree', 8, NULL),
-(9, 'CMD009', '2024-11-09 11:00:00', 'En cours', 9, NULL),
+(9, 'CMD009', '2024-11-09 11:00:00', 'EnCours', 9, NULL),
 (10, 'CMD010', '2024-11-10 15:00:00', 'Livree', 10, NULL),
 (11, 'CMD011', '2024-11-08 08:00:00', 'Receptionnee', NULL, 4),
-(12, 'CMD012', '2024-11-09 11:00:00', 'En attente', NULL, 6),
+(12, 'CMD012', '2024-11-09 11:00:00', 'EnAttente', NULL, 6),
 (13, 'CMD013', '2024-11-10 15:00:00', 'Receptionnee', NULL, 8),
-(14, 'CMD014', '2024-11-11 12:00:00', 'En attente', NULL, 7);
+(14, 'CMD014', '2024-11-11 12:00:00', 'EnAttente', NULL, 7);
 
 -- --------------------------------------------------------
 
