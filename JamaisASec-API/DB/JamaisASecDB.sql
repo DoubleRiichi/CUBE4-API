@@ -31,55 +31,59 @@ USE `jamaisasecdb`;
 
 DROP TABLE IF EXISTS `articles`;
 CREATE TABLE `articles` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `nom` varchar(200) NOT NULL,
-  `quantite` int(10) UNSIGNED NOT NULL,
-  `image` varchar(400) DEFAULT NULL,
-  `prix_unitaire` int(10) UNSIGNED NOT NULL,
-  `colisage` int(10) UNSIGNED NOT NULL,
-  `quantite_min` int(10) UNSIGNED NOT NULL,
-  `annee` int(10) UNSIGNED NOT NULL,
-  `description` text DEFAULT NULL,
-  `familles_id` int(10) UNSIGNED DEFAULT NULL,
-  `maisons_id` int(10) UNSIGNED DEFAULT NULL,
-  `fournisseurs_id` int(11) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nom` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `quantite` int UNSIGNED NOT NULL,
+  `image` varchar(400) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `prix_unitaire` int UNSIGNED NOT NULL,
+  `colisage` int UNSIGNED NOT NULL,
+  `quantite_min` int UNSIGNED NOT NULL,
+  `annee` int UNSIGNED NOT NULL,
+  `description` text COLLATE utf8mb4_general_ci,
+  `familles_id` int UNSIGNED DEFAULT NULL,
+  `maisons_id` int UNSIGNED DEFAULT NULL,
+  `fournisseurs_id` int UNSIGNED DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `articles_ibfk_1` (`familles_id`),
+  KEY `articles_ibfk_2` (`maisons_id`),
+  KEY `articles_ibfk_3` (`fournisseurs_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `articles`
 --
 
 INSERT INTO `articles` (`id`, `nom`, `quantite`, `image`, `prix_unitaire`, `colisage`, `quantite_min`, `annee`, `description`, `familles_id`, `maisons_id`, `fournisseurs_id`) VALUES
-(1, 'Bordeaux Rouge Prestige', 50, 'bordeaux_rouge.jpg', 25.50, 6, 1, 2018, 'Un Bordeaux rouge aux arômes fruités.', 1, 1, 1),
-(2, 'Bordeaux Blanc Excellence', 40, 'bordeaux_blanc.jpg', 22.00, 6, 1, 2020, 'Un blanc sec et équilibré.', 2, 7, 1),
-(3, 'Champagne Brut Millésimé', 60, 'champagne_brut.jpg', 45.90, 3, 1, 2015, 'Un champagne raffiné et festif.', 4, 3, 2),
-(4, 'Champagne Rosé Élite', 55, 'champagne_rose.jpg', 50.00, 3, 1, 2017, 'Un rosé pétillant et délicat.', 3, 9, 2),
-(5, 'Rosé de Provence Prestige', 70, 'rose_provence.jpg', 18.75, 6, 1, 2021, 'Un rosé léger et fruité.', 3, 5, 3),
-(6, 'Blanc de Provence Fraîcheur', 45, 'blanc_provence.jpg', 20.30, 6, 1, 2019, 'Un blanc minéral et rafraîchissant.', 2, 7, 3),
-(7, 'Languedoc Rouge Tradition', 80, 'rouge_languedoc.jpg', 17.50, 6, 1, 2020, 'Un rouge corsé et équilibré.', 1, 6, 4),
-(8, 'Blanc du Languedoc Sélection', 65, 'blanc_languedoc.jpg', 19.90, 6, 1, 2019, 'Un blanc floral et fruité.', 2, 8, 4),
-(9, 'Vin Bio Naturel Rouge', 50, 'bio_rouge.jpg', 28.00, 6, 1, 2022, 'Un rouge bio naturel aux arômes intenses.', 7, 2, 5),
-(10, 'Vin Bio Blanc Harmonie', 40, 'bio_blanc.jpg', 26.50, 6, 1, 2021, 'Un blanc bio aux notes subtiles.', 7, 7, 5),
-(11, 'Bourgogne Chardonnay Élégance', 55, 'bourgogne_blanc.jpg', 35.00, 6, 1, 2018, 'Un chardonnay aux notes beurrées et fruitées.', 2, 10, 6),
-(12, 'Bourgogne Pinot Noir Intense', 60, 'bourgogne_rouge.jpg', 38.50, 6, 1, 2017, 'Un rouge puissant et équilibré.', 1, 6, 6),
-(13, 'Champagne Extra Brut Réserve', 70, 'champagne_extra.jpg', 55.00, 3, 1, 2014, 'Un extra brut d’exception.', 4, 3, 7),
-(14, 'Champagne Blanc de Blancs Grand Cru', 50, 'blanc_de_blancs.jpg', 60.00, 3, 1, 2016, 'Un blanc de blancs raffiné et complexe.', 6, 9, 7),
-(15, 'Riesling Grand Cru Alsace', 40, 'riesling.jpg', 29.50, 6, 1, 2020, 'Un riesling minéral et aromatique.', 2, 5, 8),
-(16, 'Gewurztraminer Sélection', 45, 'gewurztraminer.jpg', 32.00, 6, 1, 2019, 'Un blanc épicé et floral.', 2, 10, 8),
-(17, 'Côte du Rhône Syrah Prestige', 50, 'rhone_rouge.jpg', 22.75, 6, 1, 2019, 'Un rouge puissant et épicé.', 1, 8, 9),
-(18, 'Viognier Blanc du Rhône', 55, 'viognier.jpg', 24.90, 6, 1, 2020, 'Un blanc riche et fruité.', 2, 7, 9),
-(19, 'Corse Rouge Terroir', 60, 'corse_rouge.jpg', 20.50, 6, 1, 2021, 'Un rouge corsé et généreux.', 1, 6, 10),
-(20, 'Corse Blanc Fraîcheur', 50, 'corse_blanc.jpg', 22.00, 6, 1, 2020, 'Un blanc frais et expressif.', 2, 5, 10),
-(21, 'Bordeaux Supérieur Tradition', 55, 'bordeaux_superieur.jpg', 23.50, 6, 1, 2018, 'Un Bordeaux rouge profond et structuré.', 1, 1, 1),
-(22, 'Rosé Plaisir', 65, 'rose_plaisir.jpg', 19.90, 6, 1, 2021, 'Un rosé idéal.', 3, 5, 3),
-(23, 'Vin Doux Naturel Muscat', 40, 'vin_doux_muscat.jpg', 27.50, 6, 1, 2019, 'Un vin doux aux notes de miel et d’abricot.', 5, 10, 5),
-(24, 'Grand Cru Bourgogne Pinot Noir', 50, 'grand_cru_bourgogne.jpg', 42.00, 6, 1, 2016, 'Un pinot noir d’exception.', 1, 6, 6),
-(25, 'Crémant d Alsace Élégance', 45, 'cremant_alsace.jpg', 33.00, 6, 1, 2017, 'Un crémant fin et délicat.', 6, 9, 8),
-(26, 'Sauternes Liquoreux', 35, 'sauternes.jpg', 55.00, 6, 1, 2015, 'Un vin liquoreux au bouquet complexe.', 5, 4, 4),
-(27, 'Côte-Rôtie Vieilles Vignes', 38, 'cote_rotie.jpg', 48.00, 6, 1, 2016, 'Un vin rouge puissant et élégant.', 1, 8, 9),
-(28, 'Vin Naturel Rouge Authentique', 40, 'naturel_rouge.jpg', 30.00, 6, 1, 2021, 'Un vin naturel sans sulfites.', 8, 2, 5),
-(29, 'Vin Primeur Fruité', 70, 'vin_primeur.jpg', 15.50, 6, 1, 2023, 'Un primeur léger et fruité.', 9, 1, 3),
-(30, 'Châteauneuf-du-Pape Excellence', 45, 'chateauneuf.jpg', 50.00, 6, 1, 2017, 'Un rouge complexe et structuré.', 1, 8, 9),
+(1, 'Bordeaux Rouge Prestige', 50, 'bordeaux_rouge.jpg', 26, 6, 1, 2018, 'Un Bordeaux rouge aux arômes fruités.', 1, 1, 1),
+(2, 'Bordeaux Blanc Excellence', 40, 'bordeaux_blanc.jpg', 22, 6, 1, 2020, 'Un blanc sec et équilibré.', 2, 7, 1),
+(3, 'Champagne Brut Millésimé', 60, 'champagne_brut.jpg', 46, 3, 1, 2015, 'Un champagne raffiné et festif.', 4, 3, 2),
+(4, 'Champagne Rosé Élite', 55, 'champagne_rose.jpg', 50, 3, 1, 2017, 'Un rosé pétillant et délicat.', 3, 9, 2),
+(5, 'Rosé de Provence Prestige', 70, 'rose_provence.jpg', 19, 6, 1, 2021, 'Un rosé léger et fruité.', 3, 5, 3),
+(6, 'Blanc de Provence Fraîcheur', 45, 'blanc_provence.jpg', 20, 6, 1, 2019, 'Un blanc minéral et rafraîchissant.', 2, 7, 3),
+(7, 'Languedoc Rouge Tradition', 80, 'rouge_languedoc.jpg', 18, 6, 1, 2020, 'Un rouge corsé et équilibré.', 1, 6, 4),
+(8, 'Blanc du Languedoc Sélection', 65, 'blanc_languedoc.jpg', 20, 6, 1, 2019, 'Un blanc floral et fruité.', 2, 8, 4),
+(9, 'Vin Bio Naturel Rouge', 50, 'bio_rouge.jpg', 28, 6, 1, 2022, 'Un rouge bio naturel aux arômes intenses.', 7, 2, 5),
+(10, 'Vin Bio Blanc Harmonie', 40, 'bio_blanc.jpg', 27, 6, 1, 2021, 'Un blanc bio aux notes subtiles.', 7, 7, 5),
+(11, 'Bourgogne Chardonnay Élégance', 55, 'bourgogne_blanc.jpg', 35, 6, 1, 2018, 'Un chardonnay aux notes beurrées et fruitées.', 2, 10, 6),
+(12, 'Bourgogne Pinot Noir Intense', 60, 'bourgogne_rouge.jpg', 39, 6, 1, 2017, 'Un rouge puissant et équilibré.', 1, 6, 6),
+(13, 'Champagne Extra Brut Réserve', 70, 'champagne_extra.jpg', 55, 3, 1, 2014, 'Un extra brut d’exception.', 4, 3, 7),
+(14, 'Champagne Blanc de Blancs Grand Cru', 50, 'blanc_de_blancs.jpg', 60, 3, 1, 2016, 'Un blanc de blancs raffiné et complexe.', 6, 9, 7),
+(15, 'Riesling Grand Cru Alsace', 40, 'riesling.jpg', 30, 6, 1, 2020, 'Un riesling minéral et aromatique.', 2, 5, 8),
+(16, 'Gewurztraminer Sélection', 45, 'gewurztraminer.jpg', 32, 6, 1, 2019, 'Un blanc épicé et floral.', 2, 10, 8),
+(17, 'Côte du Rhône Syrah Prestige', 50, 'rhone_rouge.jpg', 23, 6, 1, 2019, 'Un rouge puissant et épicé.', 1, 8, 9),
+(18, 'Viognier Blanc du Rhône', 55, 'viognier.jpg', 25, 6, 1, 2020, 'Un blanc riche et fruité.', 2, 7, 9),
+(19, 'Corse Rouge Terroir', 60, 'corse_rouge.jpg', 21, 6, 1, 2021, 'Un rouge corsé et généreux.', 1, 6, 10),
+(20, 'Corse Blanc Fraîcheur', 50, 'corse_blanc.jpg', 22, 6, 1, 2020, 'Un blanc frais et expressif.', 2, 5, 10),
+(21, 'Bordeaux Supérieur Tradition', 55, 'bordeaux_superieur.jpg', 24, 6, 1, 2018, 'Un Bordeaux rouge profond et structuré.', 1, 1, 1),
+(22, 'Rosé Plaisir', 65, 'rose_plaisir.jpg', 20, 6, 1, 2021, 'Un rosé idéal.', 3, 5, 3),
+(23, 'Vin Doux Naturel Muscat', 40, 'vin_doux_muscat.jpg', 28, 6, 1, 2019, 'Un vin doux aux notes de miel et d’abricot.', 5, 10, 5),
+(24, 'Grand Cru Bourgogne Pinot Noir', 50, 'grand_cru_bourgogne.jpg', 42, 6, 1, 2016, 'Un pinot noir d’exception.', 1, 6, 6),
+(25, 'Crémant d Alsace Élégance', 45, 'cremant_alsace.jpg', 33, 6, 1, 2017, 'Un crémant fin et délicat.', 6, 9, 8),
+(26, 'Sauternes Liquoreux', 35, 'sauternes.jpg', 55, 6, 1, 2015, 'Un vin liquoreux au bouquet complexe.', 5, 4, 4),
+(27, 'Côte-Rôtie Vieilles Vignes', 38, 'cote_rotie.jpg', 48, 6, 1, 2016, 'Un vin rouge puissant et élégant.', 1, 8, 9),
+(28, 'Vin Naturel Rouge Authentique', 40, 'naturel_rouge.jpg', 30, 6, 1, 2021, 'Un vin naturel sans sulfites.', 8, 2, 5),
+(29, 'Vin Primeur Fruité', 70, 'vin_primeur.jpg', 16, 6, 1, 2023, 'Un primeur léger et fruité.', 9, 1, 3),
+(30, 'Châteauneuf-du-Pape Excellence', 45, 'chateauneuf.jpg', 50, 6, 1, 2017, 'Un rouge complexe et structuré.', 1, 8, 9),
 (31, 'Maison Mumm Cordon Rouge', 200, 'mumm_cordon_rouge.jpg', 35, 12, 6, 2023, 'Champagne brut aux notes de pomme et de brioche.', 4, 3, 2),
 (32, 'Chateau d Yquem 2010', 30, 'yquem_2010.jpg', 300, 6, 1, 2010, 'Vin doux liquoreux avec des aromes de miel et de fruits exotiques.', 5, 4, 2),
 (33, 'Chateau Petrus 2012', 20, 'petrus_2012.jpg', 3000, 3, 1, 2012, 'Vin rouge exceptionnel avec des notes de prune et de truffe.', 1, 5, 1),
@@ -97,64 +101,62 @@ INSERT INTO `articles` (`id`, `nom`, `quantite`, `image`, `prix_unitaire`, `coli
 
 DROP TABLE IF EXISTS `articlescommandes`;
 CREATE TABLE `articlescommandes` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `quantite` int(10) UNSIGNED NOT NULL,
-  `articles_id` int(10) UNSIGNED DEFAULT NULL,
-  `commandes_id` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `quantite` int UNSIGNED NOT NULL,
+  `articles_id` int UNSIGNED DEFAULT NULL,
+  `commandes_id` int UNSIGNED DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `articlescommandes`
 --
 
-INSERT INTO `articlescommandes` (`quantite`, `articles_id`, `commandes_id`) VALUES
-(3, 5, 1),
-(2, 10, 1),
-(6, 13, 1),
-(3, 26, 1),
-(4, 13, 1),
-(4, 3, 2),
-(6, 4, 2),
-(5, 1, 3),
-(3, 2, 3),
-(2, 3, 3),
-(7, 9, 4),
-(3, 18, 4),
-(6, 25, 4),
-(3, 18, 4),
-(9, 14, 4),
-(4, 12, 5),
-(6, 20, 5),
-(2, 27, 5),
-(3, 12, 5),
-(9, 16, 5),
-(3, 6, 6),
-(5, 22, 6),
-(2, 8, 7),
-(7, 30, 7),
-(6, 29, 7),
-(3, 17, 7),
-(9, 23, 7),
-(4, 14, 8),
-(5, 25, 8),
-(6, 19, 9),
-(3, 28, 9),
-(5, 16, 10),
-(4, 27, 10),
-(3, 7, 11),
-(5, 8, 11),
-(2, 26, 11),
-(4, 11, 12),
-(3, 12, 12),
-(5, 24, 12),
-(6, 15, 13),
-(2, 16, 13),
-(4, 25, 13),
-(3, 13, 14),
-(5, 14, 14);
-
-
-
+INSERT INTO `articlescommandes` (`id`, `quantite`, `articles_id`, `commandes_id`) VALUES
+(1, 3, 5, 1),
+(2, 2, 10, 1),
+(3, 6, 13, 1),
+(4, 3, 26, 1),
+(5, 4, 13, 1),
+(6, 3, 4, 2),
+(7, 6, 3, 2),
+(8, 5, 1, 3),
+(9, 3, 2, 3),
+(10, 2, 3, 3),
+(11, 7, 9, 4),
+(12, 3, 18, 4),
+(13, 6, 25, 4),
+(14, 3, 18, 4),
+(15, 9, 14, 4),
+(16, 4, 12, 5),
+(17, 6, 20, 5),
+(18, 2, 27, 5),
+(19, 3, 12, 5),
+(20, 9, 16, 5),
+(21, 3, 6, 6),
+(22, 5, 22, 6),
+(23, 2, 8, 7),
+(24, 7, 30, 7),
+(25, 6, 29, 7),
+(26, 3, 17, 7),
+(27, 9, 23, 7),
+(28, 4, 14, 8),
+(29, 5, 25, 8),
+(30, 6, 19, 9),
+(31, 3, 28, 9),
+(32, 5, 16, 10),
+(33, 4, 27, 10),
+(34, 3, 7, 11),
+(35, 5, 8, 11),
+(36, 2, 26, 11),
+(37, 4, 11, 12),
+(38, 3, 12, 12),
+(39, 5, 24, 12),
+(40, 6, 15, 13),
+(41, 2, 16, 13),
+(42, 4, 25, 13),
+(43, 3, 13, 14),
+(44, 5, 14, 14);
 
 -- --------------------------------------------------------
 
@@ -164,13 +166,14 @@ INSERT INTO `articlescommandes` (`quantite`, `articles_id`, `commandes_id`) VALU
 
 DROP TABLE IF EXISTS `clients`;
 CREATE TABLE `clients` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `nom` varchar(200) NOT NULL,
-  `adresse` varchar(400) DEFAULT NULL,
-  `mail` varchar(320) DEFAULT NULL,
-  `mot_de_passe` varchar(500) NOT NULL,
-  `telephone` varchar(12) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nom` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `adresse` varchar(400) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `mail` varchar(320) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `mot_de_passe` varchar(500) COLLATE utf8mb4_general_ci NOT NULL,
+  `telephone` varchar(12) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `clients`
@@ -196,14 +199,17 @@ INSERT INTO `clients` (`id`, `nom`, `adresse`, `mail`, `mot_de_passe`, `telephon
 --
 
 DROP TABLE IF EXISTS `commandes`;
-CREATE TABLE `commandes` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `reference` varchar(16) NOT NULL,
+CREATE TABLE IF NOT EXISTS `commandes` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `reference` varchar(16) COLLATE utf8mb4_general_ci NOT NULL,
   `date` datetime NOT NULL,
-  `status` varchar(30) DEFAULT NULL,
-  `clients_id` int(10) UNSIGNED DEFAULT NULL,
-  `fournisseurs_id` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `status` varchar(30) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `clients_id` int UNSIGNED DEFAULT NULL,
+  `fournisseurs_id` int UNSIGNED DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `clients_id` (`clients_id`),
+  KEY `fournisseurs_id` (`fournisseurs_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `commandes`
@@ -232,10 +238,11 @@ INSERT INTO `commandes` (`id`, `reference`, `date`, `status`, `clients_id`, `fou
 --
 
 DROP TABLE IF EXISTS `familles`;
-CREATE TABLE `familles` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `nom` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE IF NOT EXISTS `familles` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nom` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `familles`
@@ -260,14 +267,15 @@ INSERT INTO `familles` (`id`, `nom`) VALUES
 --
 
 DROP TABLE IF EXISTS `fournisseurs`;
-CREATE TABLE `fournisseurs` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `nom` varchar(200) NOT NULL,
-  `adresse` varchar(400) DEFAULT NULL,
-  `mail` varchar(320) DEFAULT NULL,
-  `telephone` varchar(12) DEFAULT NULL,
-  `SIRET` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE IF NOT EXISTS `fournisseurs` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nom` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `adresse` varchar(400) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `mail` varchar(320) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `telephone` varchar(12) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `SIRET` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `fournisseurs`
@@ -292,10 +300,11 @@ INSERT INTO `fournisseurs` (`id`, `nom`, `adresse`, `mail`, `telephone`, `SIRET`
 --
 
 DROP TABLE IF EXISTS `maisons`;
-CREATE TABLE `maisons` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `nom` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE IF NOT EXISTS `maisons` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nom` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `maisons`
@@ -314,106 +323,7 @@ INSERT INTO `maisons` (`id`, `nom`) VALUES
 (10, 'Chateau Cheval Blanc');
 
 --
--- Indexes for dumped tables
---
-
---
--- Indexes for table `articles`
---
-ALTER TABLE `articles`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `articles_ibfk_1` (`familles_id`),
-  ADD KEY `articles_ibfk_2` (`maisons_id`),
-  ADD KEY `articles_ibfk_3` (`fournisseurs_id`);
-
---
--- Indexes for table `articlescommandes`
---
-ALTER TABLE `articlescommandes`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `articlescommandes_ibfk_1` (`articles_id`),
-  ADD KEY `articlescommandes_ibfk_2` (`commandes_id`);
-
---
--- Indexes for table `clients`
---
-ALTER TABLE `clients`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `commandes`
---
-ALTER TABLE `commandes`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `clients_id` (`clients_id`),
-  ADD KEY `fournisseurs_id` (`fournisseurs_id`);
-
---
--- Indexes for table `familles`
---
-ALTER TABLE `familles`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fournisseurs`
---
-ALTER TABLE `fournisseurs`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `maisons`
---
-ALTER TABLE `maisons`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `articles`
---
-ALTER TABLE `articles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `articlescommandes`
---
-ALTER TABLE `articlescommandes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
-
---
--- AUTO_INCREMENT for table `clients`
---
-ALTER TABLE `clients`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT for table `commandes`
---
-ALTER TABLE `commandes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT for table `familles`
---
-ALTER TABLE `familles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `fournisseurs`
---
-ALTER TABLE `fournisseurs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `maisons`
---
-ALTER TABLE `maisons`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
