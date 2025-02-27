@@ -179,6 +179,41 @@ namespace JamaisASec.Controllers
 
         }
 
+        [HttpPut]
+        [Route("update/status/{id}")]
+        public IActionResult UpdateStatus(int id, [FromBody] JsonElement data)
+        {
+            var existingCommande = _context.Commandes.Find(id);
+            if (existingCommande == null)
+            {
+                return NotFound("Commande non trouvée.");
+            }
+
+            // Vérifie si le JSON contient bien une propriété "status"
+            if (!data.TryGetProperty("Status", out var statusJson))
+            {
+                return BadRequest("Champ 'Status' manquant.");
+            }
+
+            try
+            {
+                var statusString = statusJson.GetString(); // Récupère le statut en string
+                
+                if (statusString == null)
+                {
+                    return BadRequest("Le champ 'Status' ne peut pas être vide");
+                }
+                existingCommande.Status = statusString;
+                _context.SaveChanges();
+                return Ok();
+                
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erreur interne : {ex.Message}");
+            }
+        }
+
         [HttpDelete]
         [Route("delete/{id}")]
         public IActionResult Delete(int id)
