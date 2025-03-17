@@ -6,7 +6,7 @@ using System.Linq;
 namespace JamaisASec.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("/[controller]")]
     public class FournisseursController : ControllerBase
     {
         private readonly JamaisASecDbContext _context;
@@ -21,7 +21,11 @@ namespace JamaisASec.Controllers
         public ActionResult GetAll()
         {
             var data = _context.Fournisseurs.ToList();
-            return Ok(data);
+            if(data.Any()) { 
+                return Ok(data);
+            }
+
+            return NotFound();
         }
 
         [HttpGet]
@@ -33,6 +37,7 @@ namespace JamaisASec.Controllers
             {
                 return NotFound();
             }
+
             return Ok(fournisseur);
         }
 
@@ -45,9 +50,18 @@ namespace JamaisASec.Controllers
                 return BadRequest("Fournisseur data is null.");
             }
 
-            _context.Fournisseurs.Add(fournisseur);
-            _context.SaveChanges();
-            return CreatedAtAction(nameof(GetById), new { id = fournisseur.ID }, fournisseur);
+            try
+            {
+                _context.Fournisseurs.Add(fournisseur);
+                _context.SaveChanges();
+                return CreatedAtAction(nameof(GetById), new { id = fournisseur.ID }, fournisseur);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500); // 500 = internal server error 
+            }
+
+
         }
 
         [HttpPut]
@@ -71,9 +85,17 @@ namespace JamaisASec.Controllers
             existingFournisseur.Telephone = fournisseur.Telephone;
             existingFournisseur.SIRET = fournisseur.SIRET;
 
-            _context.Fournisseurs.Update(existingFournisseur);
-            _context.SaveChanges();
-            return NoContent();
+            try
+            {
+                _context.Fournisseurs.Update(existingFournisseur);
+                _context.SaveChanges();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500); // 500 = internal server error 
+            }
+
         }
 
         [HttpDelete]
@@ -86,9 +108,17 @@ namespace JamaisASec.Controllers
                 return NotFound();
             }
 
-            _context.Fournisseurs.Remove(fournisseur);
-            _context.SaveChanges();
-            return NoContent();
+            try
+            {
+                _context.Fournisseurs.Remove(fournisseur);
+                _context.SaveChanges();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500); // 500 = internal server error 
+            }
+
         }
     }
 }
