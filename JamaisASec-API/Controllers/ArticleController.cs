@@ -63,7 +63,6 @@ namespace JamaisASec.Controllers {
         public ActionResult GetById(int id)
         {
 
-
             var data = from article in _context.Articles
                        where article.ID == id
                        join famille in _context.Familles
@@ -119,7 +118,7 @@ namespace JamaisASec.Controllers {
             existingArticle.Nom = article.Nom;
             existingArticle.Quantite = article.Quantite;
             existingArticle.Quantite_Min = article.Quantite_Min;
-            existingArticle.Image = article.Image;
+            existingArticle.Image = existingArticle.Image;
             existingArticle.Prix_unitaire = article.Prix_unitaire;
             existingArticle.Colisage = article.Colisage;
             existingArticle.Quantite_Min = article.Quantite_Min;
